@@ -1,5 +1,5 @@
 //
-//  FoursquareProvider.swift
+//  FoursquareService.swift
 //  FoursquareAppSwiftUI
 //
 //  Created by Fedii Ihor on 25.10.2022.

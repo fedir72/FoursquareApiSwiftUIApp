@@ -5,11 +5,17 @@
 //  Created by Fedii Ihor on 25.10.2022.
 //
 
-import Foundation
+import UIKit
 import Moya
-class FoursquareProvider {
+//import Combine
+
+class Foursquare {
     
-   let moya = MoyaProvider<FoursquareService>()
+    //@Published var places = [Place]()
+    let moya = MoyaProvider<FoursquareService>()
+    
+    static let shared = Foursquare()
+    private init() { }
     
    func decodejson<T:Decodable>(type: T.Type, from: Data?) -> T? {
         let decoder = JSONDecoder()
@@ -24,5 +30,27 @@ class FoursquareProvider {
         }
     }
     
-    
+    func getNearestPlaces(term: String?,
+                          category index: String?,
+                          lat: Double,long: Double , completion: @escaping (Result<Places,Error>) -> ()) {
+        self.moya.request(
+            .getPlaces(
+                term: term ?? "",
+                category: index ?? "" ,
+                lat: lat,
+                long: long,
+                radius: 1000,
+                limit: 50)) { result in
+                    switch result {
+                        case .success(let responce):
+                        guard let value =
+                        self.decodejson(type: Places.self, from: responce.data)
+                        else { return }
+                        completion(.success(value))
+                        case .failure(let error):
+                        completion(.failure(error))
+                           }
+                       }
+                   }
+  
 }
