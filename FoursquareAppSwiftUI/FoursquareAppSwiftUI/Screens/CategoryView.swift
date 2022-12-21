@@ -14,16 +14,18 @@ struct CategoryView: View {
     
     var body: some View {
         
-            VStack {
-                  HStack {
-                      Text("Categories")
-                          .foregroundColor(.white)
-                          .font(.title2.bold())
-                          .padding(.leading, 14)
-                      Spacer()
-                  }
-                  .padding(.bottom, 10)
-
+        VStack {
+            HStack {
+                Text("Categories")
+                    .foregroundColor(.white)
+                    .font(.title2.bold())
+                    .padding(.leading, 14)
+                    .padding(.bottom, 10)
+                Spacer()
+            }
+            .background(Color.gray)
+            
+                
                 List {
                     ForEach(Categories.allCases, id:  \.imageName) { category in
                         HStack {
@@ -41,13 +43,9 @@ struct CategoryView: View {
                         }
                     }
                 }
-                .scrollDisabled(true)
                 .listStyle(.plain)
-            
-            }
-            .background(Color.gray)
         }
-    
+    }
 }
 
 struct CategoryView_Previews: PreviewProvider {
