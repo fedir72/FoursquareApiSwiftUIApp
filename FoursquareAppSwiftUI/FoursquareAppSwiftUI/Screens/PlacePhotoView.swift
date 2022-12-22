@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PlacePhotoView: View {
+struct DetailPlaceView: View {
     var body: some View {
         ZStack {
             Color.blue
@@ -20,6 +20,6 @@ struct PlacePhotoView: View {
 
 struct PlacePhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        PlacePhotoView()
+        DetailPlaceView()
     }
 }

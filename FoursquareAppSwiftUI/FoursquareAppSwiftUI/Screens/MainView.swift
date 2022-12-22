@@ -15,7 +15,7 @@ struct MainView: View {
         ZStack {
             CategoryView(searchCategoryIndex: $searchCategoryIndex,
                          showCategoryView: $showCategoryView)
-            PlaceView(showCategories: $showCategoryView,
+            GeopointView(showCategories: $showCategoryView,
                       searchCategoryIndex: $searchCategoryIndex)
                 .offset(x: self.showCategoryView ? 250 : 0, y: 0)
                 .animation(.easeIn,value: self.showCategoryView)

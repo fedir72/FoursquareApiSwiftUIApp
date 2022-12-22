@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 //import Combine
 
-struct PlaceView: View {
+struct GeopointView: View {
     
     @State var places = [Place]()
     @State var searchTerm: String = ""
@@ -32,11 +32,10 @@ struct PlaceView: View {
                         .foregroundColor(.red)
                 }
                         ForEach(places,id: \.name) { place in
-                            SearchCellView(place: place)
-                                .onTapGesture {
-                                    
-                          }
-                       }
+                            NavigationLink(destination: DetailPlaceView(place: place)) {
+                                SearchCellView(place: place)
+                            }
+                        }
                 }
                .listStyle(.grouped)
                .onChange(of: searchTerm){ newTerm in
@@ -63,7 +62,7 @@ struct PlaceView: View {
                     } label: {
                         Image(systemName: "list.bullet")
                     }
-                }
+                    }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                       showSearchAlert()
@@ -77,14 +76,14 @@ struct PlaceView: View {
     }
 }
 
-struct PlaceView_Previews: PreviewProvider {
+struct GeopointView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceView(showCategories: .constant(false),
+        GeopointView(showCategories: .constant(false),
                   searchCategoryIndex: .constant(0))
     }
 }
 
-extension PlaceView {
+extension GeopointView {
     
     func searchPlaces(term: String?,
                       category: String?,

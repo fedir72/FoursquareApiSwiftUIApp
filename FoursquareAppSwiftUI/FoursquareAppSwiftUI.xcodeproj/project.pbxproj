@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		BD6940A6294E0144000AE3BB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6940A5294E0144000AE3BB /* MainView.swift */; };
+		BDA31AE529538E2E0069E38F /* DetailGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA31AE429538E2E0069E38F /* DetailGridCell.swift */; };
 		BDBB7BCC294BC43600515A8C /* CategoryPlaceMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBB7BCB294BC43600515A8C /* CategoryPlaceMarker.swift */; };
 		BDBB7BCE294BCC9F00515A8C /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBB7BCD294BCC9F00515A8C /* Categories.swift */; };
 		BDBB7BD2294BCCEA00515A8C /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBB7BD1294BCCEA00515A8C /* CategoryView.swift */; };
 		BDCA3E6F290844DC006420E4 /* FoursquareAppSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA3E6E290844DC006420E4 /* FoursquareAppSwiftUIApp.swift */; };
-		BDCA3E71290844DC006420E4 /* PlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA3E70290844DC006420E4 /* PlaceView.swift */; };
+		BDCA3E71290844DC006420E4 /* GeopointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA3E70290844DC006420E4 /* GeopointView.swift */; };
 		BDCA3E73290844DD006420E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDCA3E72290844DD006420E4 /* Assets.xcassets */; };
 		BDCA3E76290844DD006420E4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDCA3E75290844DD006420E4 /* Preview Assets.xcassets */; };
 		BDCA3E84290855DD006420E4 /* MoyaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA3E83290855DD006420E4 /* MoyaService.swift */; };
@@ -24,19 +25,20 @@
 		BDCA3E93290865B0006420E4 /* PlaceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA3E8E290865B0006420E4 /* PlaceModels.swift */; };
 		BDCA3E94290865B0006420E4 /* PhotoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA3E8F290865B0006420E4 /* PhotoItem.swift */; };
 		BDCA3E9629086BDF006420E4 /* SearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA3E9529086BDF006420E4 /* SearchCellView.swift */; };
-		BDE38F022909CA200098C16B /* PlacePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE38F012909CA200098C16B /* PlacePhotoView.swift */; };
+		BDE38F022909CA200098C16B /* DetailPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE38F012909CA200098C16B /* DetailPlaceView.swift */; };
 		BDF9DE522909B9A500E8ECE6 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = BDF9DE512909B9A500E8ECE6 /* SDWebImageSwiftUI */; };
 		BDF9DE552909BF4F00E8ECE6 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF9DE542909BF4F00E8ECE6 /* ViewExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BD6940A5294E0144000AE3BB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		BDA31AE429538E2E0069E38F /* DetailGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGridCell.swift; sourceTree = "<group>"; };
 		BDBB7BCB294BC43600515A8C /* CategoryPlaceMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPlaceMarker.swift; sourceTree = "<group>"; };
 		BDBB7BCD294BCC9F00515A8C /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		BDBB7BD1294BCCEA00515A8C /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		BDCA3E6B290844DC006420E4 /* FoursquareAppSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoursquareAppSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCA3E6E290844DC006420E4 /* FoursquareAppSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoursquareAppSwiftUIApp.swift; sourceTree = "<group>"; };
-		BDCA3E70290844DC006420E4 /* PlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceView.swift; sourceTree = "<group>"; };
+		BDCA3E70290844DC006420E4 /* GeopointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeopointView.swift; sourceTree = "<group>"; };
 		BDCA3E72290844DD006420E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDCA3E75290844DD006420E4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BDCA3E83290855DD006420E4 /* MoyaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaService.swift; sourceTree = "<group>"; };
@@ -47,7 +49,7 @@
 		BDCA3E8E290865B0006420E4 /* PlaceModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceModels.swift; sourceTree = "<group>"; };
 		BDCA3E8F290865B0006420E4 /* PhotoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoItem.swift; sourceTree = "<group>"; };
 		BDCA3E9529086BDF006420E4 /* SearchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellView.swift; sourceTree = "<group>"; };
-		BDE38F012909CA200098C16B /* PlacePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePhotoView.swift; sourceTree = "<group>"; };
+		BDE38F012909CA200098C16B /* DetailPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlaceView.swift; sourceTree = "<group>"; };
 		BDF9DE542909BF4F00E8ECE6 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,6 +66,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BDA31AE329538E020069E38F /* DetalPlaceView */ = {
+			isa = PBXGroup;
+			children = (
+				BDE38F012909CA200098C16B /* DetailPlaceView.swift */,
+				BDA31AE429538E2E0069E38F /* DetailGridCell.swift */,
+			);
+			path = DetalPlaceView;
+			sourceTree = "<group>";
+		};
+		BDA31AE62953972B0069E38F /* GeopointView */ = {
+			isa = PBXGroup;
+			children = (
+				BDCA3E70290844DC006420E4 /* GeopointView.swift */,
+				BDCA3E9529086BDF006420E4 /* SearchCellView.swift */,
+				BDBB7BCB294BC43600515A8C /* CategoryPlaceMarker.swift */,
+			);
+			path = GeopointView;
+			sourceTree = "<group>";
+		};
 		BDCA3E62290844DC006420E4 = {
 			isa = PBXGroup;
 			children = (
@@ -107,9 +128,9 @@
 			isa = PBXGroup;
 			children = (
 				BD6940A5294E0144000AE3BB /* MainView.swift */,
-				BDCA3E70290844DC006420E4 /* PlaceView.swift */,
 				BDBB7BD1294BCCEA00515A8C /* CategoryView.swift */,
-				BDE38F012909CA200098C16B /* PlacePhotoView.swift */,
+				BDA31AE62953972B0069E38F /* GeopointView */,
+				BDA31AE329538E020069E38F /* DetalPlaceView */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -117,8 +138,6 @@
 		BDCA3E7D29085257006420E4 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				BDCA3E9529086BDF006420E4 /* SearchCellView.swift */,
-				BDBB7BCB294BC43600515A8C /* CategoryPlaceMarker.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -257,13 +276,14 @@
 			files = (
 				BDF9DE552909BF4F00E8ECE6 /* ViewExtensions.swift in Sources */,
 				BDBB7BCE294BCC9F00515A8C /* Categories.swift in Sources */,
-				BDCA3E71290844DC006420E4 /* PlaceView.swift in Sources */,
+				BDCA3E71290844DC006420E4 /* GeopointView.swift in Sources */,
 				BDCA3E92290865B0006420E4 /* TipsModels.swift in Sources */,
 				BDBB7BCC294BC43600515A8C /* CategoryPlaceMarker.swift in Sources */,
 				BDCA3E84290855DD006420E4 /* MoyaService.swift in Sources */,
 				BDCA3E90290865B0006420E4 /* placesAndNearbyModels.swift in Sources */,
-				BDE38F022909CA200098C16B /* PlacePhotoView.swift in Sources */,
+				BDE38F022909CA200098C16B /* DetailPlaceView.swift in Sources */,
 				BDCA3E6F290844DC006420E4 /* FoursquareAppSwiftUIApp.swift in Sources */,
+				BDA31AE529538E2E0069E38F /* DetailGridCell.swift in Sources */,
 				BD6940A6294E0144000AE3BB /* MainView.swift in Sources */,
 				BDCA3E93290865B0006420E4 /* PlaceModels.swift in Sources */,
 				BDCA3E86290855F3006420E4 /* FoursquareService.swift in Sources */,

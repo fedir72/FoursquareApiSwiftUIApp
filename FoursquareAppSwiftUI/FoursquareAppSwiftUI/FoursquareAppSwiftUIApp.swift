@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+
+let screen = UIScreen.main.bounds
+
 @main
 struct FoursquareAppSwiftUIApp: App {
     var body: some Scene {

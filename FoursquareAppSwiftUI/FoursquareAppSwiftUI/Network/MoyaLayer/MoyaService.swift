@@ -10,10 +10,8 @@ import Moya
 //import Combine
 
 class Foursquare {
-    
-    //@Published var places = [Place]()
+
     let moya = MoyaProvider<FoursquareService>()
-    
     static let shared = Foursquare()
     private init() { }
     
@@ -32,7 +30,8 @@ class Foursquare {
     
     func getNearestPlaces(term: String?,
                           category index: String?,
-                          lat: Double,long: Double , completion: @escaping (Result<Places,Error>) -> ()) {
+                          lat: Double,long: Double ,
+                          completion: @escaping (Result<Places,Error>) -> Void) {
         self.moya.request(
             .getPlaces(
                 term: term ?? "",
@@ -52,5 +51,39 @@ class Foursquare {
                            }
                        }
                    }
+    
+    func searchPlacePhotos(by id: String,
+                           completion: @escaping(Result<Photos,Error>) -> Void) {
+        self.moya.request(.placePhotos(id: id)) { result in
+            switch result {
+            case .success(let responce):
+                // print("Data", String(data: responce.data, encoding: .utf8))
+                let items = self.decodejson(type: Photos.self, from: responce.data)
+                completion(.success(items ?? []))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func getTips(by placeId: String,
+                 completion: @escaping (Result<Tips,Error>) -> Void) {
+        moya.request(.placeTips(id: placeId)) { result in
+            switch result {
+            case .success(let responce):
+                guard let newSource = self.decodejson(type: Tips.self, from: responce.data)
+                else {
+                    return
+                }
+                completion(.success(newSource))
+
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
+    
   
 }
