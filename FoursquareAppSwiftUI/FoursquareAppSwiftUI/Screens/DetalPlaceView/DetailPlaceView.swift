@@ -11,6 +11,9 @@ struct DetailPlaceView: View {
     
     let place: Place
     @State var photos: Photos = []
+    @State var showTips = false
+    
+    @State var tips = [Tip]()
     @State var gridCounter: CGFloat = 2
     @State var grid = (1...2).map { _ in
         GridItem(.flexible())
@@ -18,22 +21,29 @@ struct DetailPlaceView: View {
         
     
     var body: some View {
-        ScrollView(.vertical) {
+        VStack {
+            ScrollView(.vertical) {
                 LazyVGrid(columns: grid, spacing: 5) {
                     ForEach(photos, id: \.id) { photoItem in
                         NavigationLink {
                             
                         } label: {
                             DetailGridCell(photoItem: photoItem)
-                            .frame(
-                            width:screen.width/gridCounter - gridCounter,
-                            height: screen.width/gridCounter - gridCounter)
+                                .frame(
+                                    width:screen.width/gridCounter - gridCounter,
+                                    height: screen.width/gridCounter - gridCounter)
                         }
-                     }
-                  }
-      
-    }
-        .navigationTitle("Place photo")
+                    }
+                }
+            }
+         
+                    UsersTipsView(tips: tips)
+                    .frame(height: tips.isEmpty ? 0 : screen.width )
+                    .opacity(tips.isEmpty ? 0 : 1 )
+                    .transition(.fade(duration: 0.2))
+            
+        }.edgesIgnoringSafeArea(.bottom)
+    
         .onAppear {
             Foursquare.shared.searchPlacePhotos(by: place.fsq_id ) { result in
                 switch result {
@@ -43,6 +53,38 @@ struct DetailPlaceView: View {
                     print(error.localizedDescription)
                 }
             }
+        }
+        .navigationTitle("Place photo")
+        .toolbar {
+            
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                            if tips.isEmpty {
+                                Foursquare.shared.getTips(by: place.fsq_id) { result in
+                                    switch result {
+                                    case .failure(let err):
+                                        print(err.localizedDescription)
+                                    case .success(let newtips):
+                                        if newtips.isEmpty {
+                                            print("there are not any user tips")
+                                        } else {
+                                            withAnimation {
+                                                self.tips = newtips
+                                                print(tips)
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                withAnimation {
+                                    self.tips = []
+                                }
+                            }
+                        } label: {
+                        Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                    }
+                }
         }
     }
 }

@@ -8,10 +8,18 @@
 import Foundation
 
 struct Tip: Decodable {
-   let id: String
-   let created_at: String
-   let text: String
+   let id: String?
+   let created_at: String?
+   let text: String?
+    
 }
+
+extension Tip {
+    func dateText() -> String {
+        return String(created_at?.split(separator: "T").first ?? "no date")
+    }
+}
+
 
 typealias Tips = [Tip]
 

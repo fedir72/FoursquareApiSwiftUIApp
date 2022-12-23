@@ -72,11 +72,8 @@ class Foursquare {
             switch result {
             case .success(let responce):
                 guard let newSource = self.decodejson(type: Tips.self, from: responce.data)
-                else {
-                    return
-                }
+                else { completion(.success([])) ; return }
                 completion(.success(newSource))
-
             case .failure(let error):
                 completion(.failure(error))
             }

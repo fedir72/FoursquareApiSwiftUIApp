@@ -22,7 +22,7 @@ struct DetailGridCell: View {
                     Spacer()
                     Text(photoItem.dateStr())
                         .padding(.top, 5)
-                        .font(.system(size: 10))
+                        .font(.system(size: 13))
                         .foregroundColor(.white)
                 }
                 .padding(.trailing, 5)
