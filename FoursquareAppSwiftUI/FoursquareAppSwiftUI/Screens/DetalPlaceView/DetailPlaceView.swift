@@ -14,9 +14,9 @@ struct DetailPlaceView: View {
     @State var showTips = false
     
     @State var tips = [Tip]()
-    @State var gridCounter: CGFloat = 2
-    @State var grid = (1...2).map { _ in
-        GridItem(.flexible())
+    @State var gridCounter: CGFloat = 3
+    @State var grid = (1...3).map { _ in
+        GridItem(.flexible(maximum: screen.width/3))
     }
         
     
@@ -45,7 +45,7 @@ struct DetailPlaceView: View {
         }.edgesIgnoringSafeArea(.bottom)
     
         .onAppear {
-            Foursquare.shared.searchPlacePhotos(by: place.fsq_id ) { result in
+            DataFetcher.shared.searchPlacePhotos(by: place.fsq_id ) { result in
                 switch result {
                 case .success(let responce):
                     self.photos = responce
@@ -60,7 +60,7 @@ struct DetailPlaceView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                             if tips.isEmpty {
-                                Foursquare.shared.getTips(by: place.fsq_id) { result in
+                                DataFetcher.shared.getTips(by: place.fsq_id) { result in
                                     switch result {
                                     case .failure(let err):
                                         print(err.localizedDescription)

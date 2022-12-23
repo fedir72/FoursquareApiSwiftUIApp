@@ -9,13 +9,13 @@ import UIKit
 import Moya
 //import Combine
 
-class Foursquare {
+class DataFetcher {
 
-    let moya = MoyaProvider<FoursquareService>()
-    static let shared = Foursquare()
+    private let moya = MoyaProvider<FoursquareService>()
+    static let shared = DataFetcher()
     private init() { }
     
-   func decodejson<T:Decodable>(type: T.Type, from: Data?) -> T? {
+  private func decodejson<T:Decodable>(type: T.Type, from: Data?) -> T? {
         let decoder = JSONDecoder()
         guard let data = from else { return nil }
         
@@ -28,6 +28,7 @@ class Foursquare {
         }
     }
     
+    //MARK: - public func
     func getNearestPlaces(term: String?,
                           category index: String?,
                           lat: Double,long: Double ,
@@ -79,8 +80,5 @@ class Foursquare {
             }
         }
     }
-    
-    
-    
   
 }

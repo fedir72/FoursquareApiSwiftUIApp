@@ -11,7 +11,6 @@ struct Tip: Decodable {
    let id: String?
    let created_at: String?
    let text: String?
-    
 }
 
 extension Tip {

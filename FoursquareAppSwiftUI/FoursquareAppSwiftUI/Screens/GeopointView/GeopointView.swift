@@ -15,60 +15,61 @@ struct GeopointView: View {
     @State var searchTerm: String = ""
     @Binding var showCategories: Bool
     @Binding var searchCategoryIndex: Int
+    @ObservedObject var locationManager = LocationManager.shares
+    
     
     var body: some View {
+        
+        
         NavigationView {
             VStack {
-            VStack {
-                Text("places; \(places.count)")
-                Text("index: \(searchCategoryIndex)")
-                Text("term: \(searchTerm)")
-            }
-            List {
-                
-                if places.isEmpty {
-                    Text("Did not found any places")
-                        .font(.title)
-                        .foregroundColor(.red)
+                VStack {
+                    Text("places; \(places.count)")
+                    Text("index: \(searchCategoryIndex)")
+                    Text("term: \(searchTerm)")
                 }
-                        ForEach(places,id: \.name) { place in
-                            NavigationLink(destination: DetailPlaceView(place: place)) {
-                                SearchCellView(place: place)
-                            }
+                List {
+                    
+                    if places.isEmpty {
+                        Text("Did not found any places")
+                            .font(.title)
+                            .foregroundColor(.red)
+                    }
+                    ForEach(places,id: \.name) { place in
+                        NavigationLink(destination: DetailPlaceView(place: place)) {
+                            SearchCellView(place: place)
                         }
+                    }
                 }
-               .listStyle(.grouped)
-               .onChange(of: searchTerm){ newTerm in
-                   searchPlaces(term: newTerm,
-                                category: nil,
-                                lat: 28.1227, lon: -16.7260)
-               }
-               .onChange(of: searchCategoryIndex, perform: { newIndex in
-                   searchPlaces(term: nil,
-                                category: String(newIndex),
-                                lat: 28.1227, lon: -16.7260)
-               })
-              .onAppear {
-                   searchPlaces(term: nil,
-                             category: nil,
-                             lat: 28.1227, lon: -16.7260)
-            }
-            
-            .navigationTitle("Nearest places")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        showCategories.toggle()
-                    } label: {
-                        Image(systemName: "list.bullet")
+                .listStyle(.grouped)
+                .onChange(of: searchTerm){ newTerm in
+                    searchPlaces(term: newTerm,
+                                 category: nil)
+                }
+                .onChange(of: searchCategoryIndex, perform: { newIndex in
+                    searchPlaces(term: nil,
+                                 category: String(newIndex))
+                })
+                .onAppear {
+                    searchPlaces(term: nil,
+                                 category: nil)
+                }
+                
+                .navigationTitle("Nearest places")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            showCategories.toggle()
+                        } label: {
+                            Image(systemName: "list.bullet")
+                        }
                     }
-                    }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                      showSearchAlert()
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            showSearchAlert()
+                        } label: {
+                            Image(systemName: "magnifyingglass")
+                        }
                     }
                 }
             }
@@ -86,14 +87,12 @@ struct GeopointView_Previews: PreviewProvider {
 extension GeopointView {
     
     func searchPlaces(term: String?,
-                      category: String?,
-                      lat: Double,
-                      lon: Double) {
-        Foursquare.shared.getNearestPlaces(
+                      category: String?) {
+        DataFetcher.shared.getNearestPlaces(
             term: term,
             category: category,
-            lat: lat,
-            long: lon) { result in
+            lat: locationManager.userLocation?.coordinate.latitude ?? 0,
+            long: locationManager.userLocation?.coordinate.longitude ?? 0) { result in
                 switch result {
                 case .success(let places):
                     self.places = places.results
