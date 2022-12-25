@@ -66,6 +66,13 @@ struct GeopointView: View {
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
+                            print("show map")
+                        } label: {
+                            Image(systemName: "globe")
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
                             showSearchAlert()
                         } label: {
                             Image(systemName: "magnifyingglass")
