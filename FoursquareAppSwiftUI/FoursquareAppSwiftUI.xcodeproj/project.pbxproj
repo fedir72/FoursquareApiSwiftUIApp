@@ -30,6 +30,7 @@
 		BDCA3E94290865B0006420E4 /* PhotoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA3E8F290865B0006420E4 /* PhotoItem.swift */; };
 		BDCA3E9629086BDF006420E4 /* SearchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCA3E9529086BDF006420E4 /* SearchCellView.swift */; };
 		BDE38F022909CA200098C16B /* DetailPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE38F012909CA200098C16B /* DetailPlaceView.swift */; };
+		BDEDA70B2961EA3700D14592 /* LocationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEDA70A2961EA3700D14592 /* LocationMapView.swift */; };
 		BDF9DE522909B9A500E8ECE6 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = BDF9DE512909B9A500E8ECE6 /* SDWebImageSwiftUI */; };
 		BDF9DE552909BF4F00E8ECE6 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF9DE542909BF4F00E8ECE6 /* ViewExtensions.swift */; };
 /* End PBXBuildFile section */
@@ -58,6 +59,7 @@
 		BDCA3E8F290865B0006420E4 /* PhotoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoItem.swift; sourceTree = "<group>"; };
 		BDCA3E9529086BDF006420E4 /* SearchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellView.swift; sourceTree = "<group>"; };
 		BDE38F012909CA200098C16B /* DetailPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPlaceView.swift; sourceTree = "<group>"; };
+		BDEDA70A2961EA3700D14592 /* LocationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapView.swift; sourceTree = "<group>"; };
 		BDF9DE542909BF4F00E8ECE6 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,8 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				BDE38F012909CA200098C16B /* DetailPlaceView.swift */,
-				BDA31AE429538E2E0069E38F /* DetailGridCell.swift */,
-				BDA31AE729547F6C0069E38F /* UsersTipsView.swift */,
+				BDEDA7092961E8ED00D14592 /* Subviews */,
 			);
 			path = DetalPlaceView;
 			sourceTree = "<group>";
@@ -88,8 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				BDCA3E70290844DC006420E4 /* GeopointView.swift */,
-				BDCA3E9529086BDF006420E4 /* SearchCellView.swift */,
-				BDBB7BCB294BC43600515A8C /* CategoryPlaceMarker.swift */,
+				BDEDA7082961E8D500D14592 /* Subviews */,
 			);
 			path = GeopointView;
 			sourceTree = "<group>";
@@ -146,6 +146,7 @@
 				BD6940A5294E0144000AE3BB /* MainView.swift */,
 				BDBB7BD1294BCCEA00515A8C /* CategoryView.swift */,
 				BDAA355E295636DE007CD6F7 /* LocationRequestView.swift */,
+				BDEDA70A2961EA3700D14592 /* LocationMapView.swift */,
 				BDA31AE62953972B0069E38F /* GeopointView */,
 				BDA31AE329538E020069E38F /* DetalPlaceView */,
 			);
@@ -181,6 +182,24 @@
 				BDCA3E85290855F3006420E4 /* FoursquareService.swift */,
 			);
 			path = MoyaLayer;
+			sourceTree = "<group>";
+		};
+		BDEDA7082961E8D500D14592 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				BDCA3E9529086BDF006420E4 /* SearchCellView.swift */,
+				BDBB7BCB294BC43600515A8C /* CategoryPlaceMarker.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		BDEDA7092961E8ED00D14592 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				BDA31AE429538E2E0069E38F /* DetailGridCell.swift */,
+				BDA31AE729547F6C0069E38F /* UsersTipsView.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		BDF9DE532909BF3400E8ECE6 /* Extensions */ = {
@@ -284,6 +303,7 @@
 				BDCA3E93290865B0006420E4 /* PlaceModels.swift in Sources */,
 				BDCA3E86290855F3006420E4 /* FoursquareService.swift in Sources */,
 				BDA31AE829547F6C0069E38F /* UsersTipsView.swift in Sources */,
+				BDEDA70B2961EA3700D14592 /* LocationMapView.swift in Sources */,
 				BDCA3E91290865B0006420E4 /* ContextModels.swift in Sources */,
 				BDCA3E9629086BDF006420E4 /* SearchCellView.swift in Sources */,
 				BDCA3E94290865B0006420E4 /* PhotoItem.swift in Sources */,

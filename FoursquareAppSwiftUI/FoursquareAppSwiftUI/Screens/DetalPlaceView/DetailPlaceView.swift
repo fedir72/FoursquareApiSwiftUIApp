@@ -10,23 +10,27 @@ import SwiftUI
 struct DetailPlaceView: View {
     
     var place: Place
-    @State var photos: Photos = []
-    @State var showTips = false
-    @State var tips = [Tip]()
-    @State var columns: CGFloat = 3
+    @State private var photos: Photos = []
+    @State private var showTips = false
+    @State private var tips = [Tip]()
+    @State private var columns: CGFloat = 3
     
-    func columns(size: CGSize, countColumns: CGFloat) -> [GridItem] {
+    func columns(size: CGSize, countColumn: CGFloat) -> [GridItem] {
         [ GridItem(.adaptive(
-            minimum: Settings.thumbnailSize(size: size,
-                                            countColumns: countColumns).width
+            minimum:
+        Settings.thumbnailSize(size: size,
+                       countColumns: countColumn).width
         ))]
+            
     }
         
     var body: some View {
         GeometryReader { geo in
             VStack {
                 ScrollView(.vertical) {
-                    LazyVGrid(columns: columns(size: geo.size, countColumns: columns), spacing: 5) {
+                    LazyVGrid(columns:
+                    columns(size: geo.size, countColumn: columns),
+                            spacing: 5) {
                         ForEach(photos, id: \.id) { photoItem in
                             NavigationLink {
                                 

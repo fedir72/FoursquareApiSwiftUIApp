@@ -5,12 +5,22 @@
 //  Created by Fedii Ihor on 23.12.2022.
 //
 
-import CoreLocation
+//import CoreLocation
+import MapKit
+
+enum MapDetails {
+    static let startLocation = CLLocationCoordinate2D(latitude: 36.02417,
+                                                      longitude: 49.89333)
+    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.01,
+                                               longitudeDelta: 0.01)
+}
 
 class LocationManager: NSObject, ObservableObject {
     
     private let manager = CLLocationManager()
     @Published var userLocation: CLLocation?
+    @Published var region = MKCoordinateRegion(center: MapDetails.startLocation,
+                                               span: MapDetails.defaultSpan)
     static var shares = LocationManager()
     
     override private init() {
@@ -36,11 +46,8 @@ extension LocationManager: CLLocationManagerDelegate {
             print("debug  restict")
         case .denied:
             print("debug denied ")
-        case .authorizedAlways:
-            print("debug always")
-        case .authorizedWhenInUse:
-            print("debug when in use")
-           // manager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            print("debug ")
         case .authorized:
             print("debug ")
             
@@ -53,6 +60,8 @@ extension LocationManager: CLLocationManagerDelegate {
                          didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         self.userLocation = location
+        region = MKCoordinateRegion(center: userLocation?.coordinate ?? MapDetails.startLocation,
+                                    span: MapDetails.defaultSpan)
         print("location is")
         manager.stopUpdatingLocation()
     }

@@ -13,7 +13,7 @@ enum Settings {
     
     static func thumbnailSize(size: CGSize, countColumns: CGFloat) -> CGSize {
         let threshold: CGFloat = 500
-        var scale: CGFloat = 0.24
+        var scale: CGFloat = 0.25
         if size.width > threshold && size.height > threshold {
       scale = 0.4 }
         return CGSize(

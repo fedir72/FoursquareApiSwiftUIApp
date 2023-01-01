@@ -7,10 +7,11 @@
 
 import SwiftUI
 import UIKit
-//import Combine
+import MapKit
 
 struct GeopointView: View {
-    
+    @State var showMap = false
+    @State var firstAppearance = true
     @State var places = [Place]()
     @State var searchTerm: String = ""
     @Binding var showCategories: Bool
@@ -50,36 +51,43 @@ struct GeopointView: View {
                     searchPlaces(term: nil,
                                  category: String(newIndex))
                 })
-                .onAppear {
-                    searchPlaces(term: nil,
-                                 category: nil)
+            }
+            .onAppear {
+                if firstAppearance {
+                    searchPlaces(term: nil, category: nil)
+                    self.firstAppearance = false
                 }
-                
-                .navigationTitle("Nearest places")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            showCategories.toggle()
-                        } label: {
-                            Image(systemName: "list.bullet")
-                        }
+            }
+            .sheet(isPresented: $showMap) {
+                    LocationMapView(showMap: $showMap,
+                                    region: $locationManager.region )
+                }
+            .navigationTitle("Nearest places")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        showCategories.toggle()
+                    } label: {
+                        Image(systemName: "list.bullet")
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            print("show map")
-                        } label: {
-                            Image(systemName: "globe")
-                        }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        print("show map")
+                        showMap.toggle()
+                    } label: {
+                        Image(systemName: "globe")
                     }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            showSearchAlert()
-                        } label: {
-                            Image(systemName: "magnifyingglass")
-                        }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showSearchAlert()
+                    } label: {
+                        Image(systemName: "magnifyingglass")
                     }
                 }
             }
+            
         }
     }
 }
@@ -92,6 +100,10 @@ struct GeopointView_Previews: PreviewProvider {
 }
 
 extension GeopointView {
+    
+    func showMapView() {
+        
+    }
     
     func searchPlaces(term: String?,
                       category: String?) {
