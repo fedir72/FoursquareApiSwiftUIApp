@@ -51,7 +51,7 @@ struct DetailPlaceView: View {
             }
             .edgesIgnoringSafeArea(.bottom)
             .onAppear {
-                    DataFetcher.shared.searchPlacePhotos(by: place.fsq_id ) { result in
+                    DataFetcher.shared.searchPlacePhotos(by: place.id ) { result in
                         switch result {
                         case .success(let responce):
                             self.photos = responce
@@ -66,7 +66,7 @@ struct DetailPlaceView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     if tips.isEmpty {
-                        DataFetcher.shared.getTips(by: place.fsq_id) { result in
+                        DataFetcher.shared.getTips(by: place.id) { result in
                             switch result {
                             case .failure(let err):
                                 print(err.localizedDescription)
@@ -115,6 +115,6 @@ struct DetailPlaceView: View {
 
 struct DetailPlaceView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailPlaceView(place:Place(fsq_id: "58bc8a1903cf257b09fad809", categories: [FoursquareAppSwiftUI.Category(id: 13347, name: "Tapas Restaurant", icon: FoursquareAppSwiftUI.Icon(prefix: "https://ss3.4sqi.net/img/categories_v2/food/tapas_", suffix: ".png")), FoursquareAppSwiftUI.Category(id: 13383, name: "Steakhouse", icon: FoursquareAppSwiftUI.Icon(prefix: "https://ss3.4sqi.net/img/categories_v2/food/steakhouse_", suffix: ".png"))], geocodes: FoursquareAppSwiftUI.Main(main: Optional(FoursquareAppSwiftUI.GeoPoint(latitude: Optional(28.122183), longitude: Optional(-16.724462)))), link: "/v3/places/58bc8a1903cf257b09fad809", location: FoursquareAppSwiftUI.Location(country: "ES", cross_street: Optional("principal"), formatted_address: Optional("Calle Grande, 9 (principal), 38670 Adeje Canary Islands")), name: "Restaurante el Puente", timezone: Optional("Atlantic/Canary")))
+        DetailPlaceView(place:Place(id: "58bc8a1903cf257b09fad809", categories: [FoursquareAppSwiftUI.Category(id: 13347, name: "Tapas Restaurant", icon: FoursquareAppSwiftUI.Icon(prefix: "https://ss3.4sqi.net/img/categories_v2/food/tapas_", suffix: ".png")), FoursquareAppSwiftUI.Category(id: 13383, name: "Steakhouse", icon: FoursquareAppSwiftUI.Icon(prefix: "https://ss3.4sqi.net/img/categories_v2/food/steakhouse_", suffix: ".png"))], geocodes: FoursquareAppSwiftUI.Main(main: Optional(FoursquareAppSwiftUI.GeoPoint(latitude: Optional(28.122183), longitude: Optional(-16.724462)))), link: "/v3/places/58bc8a1903cf257b09fad809", location: FoursquareAppSwiftUI.MapAdress(country: "ES", cross_street: Optional("principal"), formatted_address: Optional("Calle Grande, 9 (principal), 38670 Adeje Canary Islands")), name: "Restaurante el Puente", timezone: Optional("Atlantic/Canary")))
     }
 }

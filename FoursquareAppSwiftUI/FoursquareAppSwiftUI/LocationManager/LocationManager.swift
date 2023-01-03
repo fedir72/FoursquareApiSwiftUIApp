@@ -11,8 +11,8 @@ import MapKit
 enum MapDetails {
     static let startLocation = CLLocationCoordinate2D(latitude: 36.02417,
                                                       longitude: 49.89333)
-    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.01,
-                                               longitudeDelta: 0.01)
+    static let defaultSpan = MKCoordinateSpan(latitudeDelta: 0.013,
+                                               longitudeDelta: 0.013)
 }
 
 class LocationManager: NSObject, ObservableObject {

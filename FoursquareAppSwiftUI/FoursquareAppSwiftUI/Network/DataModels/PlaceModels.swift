@@ -1,18 +1,33 @@
 
 
 import Foundation
+import MapKit
 
-struct Place: Decodable {
-    let fsq_id: String
+struct Place: Decodable, Identifiable {
+    let id: String
     let categories: [Category]
     let geocodes: Main
     let link: String
-    let location: Location
+    let location: MapAdress
     let name: String
     let timezone: String?
+    
+    func location2D() -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(
+            latitude: geocodes.main?.latitude ?? MapDetails.startLocation.latitude,
+            longitude: geocodes.main?.longitude ?? MapDetails.startLocation.longitude)
+        }
+    
     }
 
-struct Location: Decodable {
+extension Place {
+    enum CodingKeys: String, CodingKey {
+        case id = "fsq_id"
+        case categories,geocodes,link,location,name,timezone
+       }
+    }
+
+struct MapAdress: Decodable {
    let country: String
    let cross_street: String?
    let formatted_address: String?
@@ -39,7 +54,6 @@ struct Icon: Decodable {
  
     func iconURl(resolution: IconResolution) -> URL? {
         let str = self.prefix + resolution.rawValue + self.suffix
-        //print(str)
         return URL(string: str)
     }
 }

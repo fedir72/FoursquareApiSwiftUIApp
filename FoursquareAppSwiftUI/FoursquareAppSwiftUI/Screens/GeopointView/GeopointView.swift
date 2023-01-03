@@ -12,7 +12,11 @@ import MapKit
 struct GeopointView: View {
     @State var showMap = false
     @State var firstAppearance = true
-    @State var places = [Place]()
+    @State var places = [Place]() {
+        didSet { print("places",places.count) }
+            
+        }
+    
     @State var searchTerm: String = ""
     @Binding var showCategories: Bool
     @Binding var searchCategoryIndex: Int
@@ -60,7 +64,8 @@ struct GeopointView: View {
             }
             .sheet(isPresented: $showMap) {
                     LocationMapView(showMap: $showMap,
-                                    region: $locationManager.region )
+                                    region: locationManager.region,
+                                    annotationitems: places )
                 }
             .navigationTitle("Nearest places")
             .toolbar {
@@ -100,11 +105,7 @@ struct GeopointView_Previews: PreviewProvider {
 }
 
 extension GeopointView {
-    
-    func showMapView() {
-        
-    }
-    
+   
     func searchPlaces(term: String?,
                       category: String?) {
         DataFetcher.shared.getNearestPlaces(
