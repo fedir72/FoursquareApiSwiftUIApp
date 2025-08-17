@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LocationRequestView: View {
+  @EnvironmentObject var locationManager: LocationManager
+ 
+  
     var body: some View {
         ZStack {
             Color(.systemBlue).edgesIgnoringSafeArea(.vertical)
@@ -29,7 +32,8 @@ struct LocationRequestView: View {
                Spacer()
                 VStack {
                     Button {
-                        LocationManager.shares.requestLocation()
+                      print("allow location?")
+                       // LocationManager.requestLocation()
                     } label: {
                         Text("Allow location")
                         .font(.title3)

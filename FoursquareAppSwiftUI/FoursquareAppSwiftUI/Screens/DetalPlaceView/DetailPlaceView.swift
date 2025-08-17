@@ -8,103 +8,61 @@
 import SwiftUI
 
 struct DetailPlaceView: View {
+    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var dataSource: PlacesDataSource
     
-    var place: Place
-    @State private var photos: Photos = []
+    @State var place: Place
     @State private var showTips = false
-    @State private var tips = [Tip]()
-    @State private var columns: CGFloat = 3
-    
+    @AppStorage("columns") private var columns: Int = 3
+  
     func columns(size: CGSize, countColumn: CGFloat) -> [GridItem] {
-        [ GridItem(.adaptive(
-            minimum:
-        Settings.thumbnailSize(size: size,
-                       countColumns: countColumn).width
+        [ GridItem(.adaptive( minimum:
+        Settings.thumbnailSize(size: size,countColumns: countColumn).width
         ))]
-            
     }
         
     var body: some View {
         GeometryReader { geo in
-            VStack {
-                ScrollView(.vertical) {
-                    LazyVGrid(columns:
-                    columns(size: geo.size, countColumn: columns),
-                            spacing: 5) {
-                        ForEach(photos, id: \.id) { photoItem in
-                            NavigationLink {
-                                
-                            } label: {
-                                DetailGridCell(photoItem: photoItem)
-                                   // .shadow(radius: 3,x: 3, y: 3)
+          ScrollView(.vertical) {
+            LazyVGrid(
+              columns:columns(size: geo.size, countColumn:CGFloat(columns)),
+              spacing: 3
+                     ) {
+                 ForEach(dataSource.placePhotos, id: \.id) { photoItem in
+                 NavigationLink {
+                                //show the photo
+                   } label: {
+                        DetailGridCell(photoItem: photoItem)
+                           .shadow(color: .black,radius: 2, x: 2, y: 2)
                             }
                         }
                     }
-                    .opacity($tips.isEmpty ? 1 : 0.3)
-                    .transition(.fade(duration: 0.2))
                 }
-                .frame(width: geo.size.width)
-                UsersTipsView(tips: $tips)
-                    .frame(height: tips.isEmpty ? 0 : screen.height*0.6 )
-                    .opacity(tips.isEmpty ? 0 : 1 )
-                    .transition(.fade(duration: 0.2))
-            }
             .edgesIgnoringSafeArea(.bottom)
             .onAppear {
-                    DataFetcher.shared.searchPlacePhotos(by: place.id ) { result in
-                        switch result {
-                        case .success(let responce):
-                            self.photos = responce
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        }
-                    }
+              dataSource.loadPlacePhotos(id: place.id)
+              dataSource.loadPlaceTips(id: place.id)
                 }
         }
-        .navigationTitle( place.name)
+        .sheet(isPresented: $showTips) {
+          UsersTipsView(tips: dataSource.placeTips)
+          }
+        .navigationTitle(place.name)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    if tips.isEmpty {
-                        DataFetcher.shared.getTips(by: place.id) { result in
-                            switch result {
-                            case .failure(let err):
-                                print(err.localizedDescription)
-                            case .success(let newtips):
-                                if newtips.isEmpty {
-                                    print("there are not any user tips")
-                                } else {
-                                    withAnimation {
-                                        self.tips = newtips
-                                        print(tips)
-                                        
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        withAnimation {
-                            self.tips = []
-                        }
-                    }
+              
+              Button {
+                  showTips.toggle()
                 } label: {
-                    Text("TIPS")
-                        .bold()
+                  Text("Tips(\(dataSource.placeTips.count))") .bold()
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Menu {
-                    Button { columns = 3 } label: {
-                        Text("Small x3")
-                    }
-                    Button { columns = 2 } label: {
-                        Text("Medium x2")
-                        
-                    }
-                    Button { columns = 1 } label: {
-                        Text("Large x1")
-                    }
-
+              Menu {
+                    Text("Cell size")
+                    Button { columns = 3 } label: { Text("Small x3") }
+                    Button { columns = 2 } label: { Text("Medium x2") }
+                    Button { columns = 1 } label: { Text("Large x1") }
                 } label: {
                     Image(systemName: "eyeglasses")
                 }

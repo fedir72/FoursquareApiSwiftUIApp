@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		88DEBC7B2E51ED5A005C1908 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DEBC7A2E51ED49005C1908 /* NetworkProvider.swift */; };
+		88DEBC7D2E51EF50005C1908 /* PlacesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DEBC7C2E51EF46005C1908 /* PlacesDataSource.swift */; };
 		BD6940A6294E0144000AE3BB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6940A5294E0144000AE3BB /* MainView.swift */; };
 		BDA31AE529538E2E0069E38F /* DetailGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA31AE429538E2E0069E38F /* DetailGridCell.swift */; };
 		BDA31AE829547F6C0069E38F /* UsersTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA31AE729547F6C0069E38F /* UsersTipsView.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		88DEBC7A2E51ED49005C1908 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		88DEBC7C2E51EF46005C1908 /* PlacesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesDataSource.swift; sourceTree = "<group>"; };
 		BD6940A5294E0144000AE3BB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BDA31AE429538E2E0069E38F /* DetailGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGridCell.swift; sourceTree = "<group>"; };
 		BDA31AE729547F6C0069E38F /* UsersTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTipsView.swift; sourceTree = "<group>"; };
@@ -76,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		88C706602E525831005D21E5 /* TipsView */ = {
+			isa = PBXGroup;
+			children = (
+				BDA31AE729547F6C0069E38F /* UsersTipsView.swift */,
+			);
+			path = TipsView;
+			sourceTree = "<group>";
+		};
 		BDA31AE329538E020069E38F /* DetalPlaceView */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,12 +155,13 @@
 		BDCA3E7C29085242006420E4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				BDA31AE329538E020069E38F /* DetalPlaceView */,
+				BDA31AE62953972B0069E38F /* GeopointView */,
+				88C706602E525831005D21E5 /* TipsView */,
 				BD6940A5294E0144000AE3BB /* MainView.swift */,
 				BDBB7BD1294BCCEA00515A8C /* CategoryView.swift */,
 				BDAA355E295636DE007CD6F7 /* LocationRequestView.swift */,
 				BDEDA70A2961EA3700D14592 /* LocationMapView.swift */,
-				BDA31AE62953972B0069E38F /* GeopointView */,
-				BDA31AE329538E020069E38F /* DetalPlaceView */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -178,6 +191,8 @@
 		BDCA3E8129085575006420E4 /* MoyaLayer */ = {
 			isa = PBXGroup;
 			children = (
+				88DEBC7C2E51EF46005C1908 /* PlacesDataSource.swift */,
+				88DEBC7A2E51ED49005C1908 /* NetworkProvider.swift */,
 				BDCA3E83290855DD006420E4 /* DataFetcher.swift */,
 				BDCA3E85290855F3006420E4 /* FoursquareService.swift */,
 			);
@@ -197,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				BDA31AE429538E2E0069E38F /* DetailGridCell.swift */,
-				BDA31AE729547F6C0069E38F /* UsersTipsView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -293,6 +307,8 @@
 				BDBB7BCE294BCC9F00515A8C /* Categories.swift in Sources */,
 				BDCA3E71290844DC006420E4 /* GeopointView.swift in Sources */,
 				BDCA3E92290865B0006420E4 /* TipsModels.swift in Sources */,
+				88DEBC7D2E51EF50005C1908 /* PlacesDataSource.swift in Sources */,
+				88DEBC7B2E51ED5A005C1908 /* NetworkProvider.swift in Sources */,
 				BDBB7BCC294BC43600515A8C /* CategoryPlaceMarker.swift in Sources */,
 				BDCA3E84290855DD006420E4 /* DataFetcher.swift in Sources */,
 				BDCA3E90290865B0006420E4 /* placesAndNearbyModels.swift in Sources */,
