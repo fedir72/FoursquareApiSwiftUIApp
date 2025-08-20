@@ -20,7 +20,7 @@ struct DetailPlaceView: View {
         Settings.thumbnailSize(size: size,countColumns: countColumn).width
         ))]
     }
-        
+
     var body: some View {
         GeometryReader { geo in
           ScrollView(.vertical) {
@@ -39,7 +39,7 @@ struct DetailPlaceView: View {
                     }
                 }
             .edgesIgnoringSafeArea(.bottom)
-            .onAppear {
+            .task {
               dataSource.loadPlacePhotos(id: place.id)
               dataSource.loadPlaceTips(id: place.id)
                 }
