@@ -14,7 +14,7 @@ struct DetailGridCell: View {
     
     var body: some View {
         ZStack {
-            AnimatedImage(url: photoItem.photoUrlStr(w: 200, h: 200))
+            AnimatedImage(url: photoItem.photoUrlStr(w: 300, h: 300))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
             VStack {

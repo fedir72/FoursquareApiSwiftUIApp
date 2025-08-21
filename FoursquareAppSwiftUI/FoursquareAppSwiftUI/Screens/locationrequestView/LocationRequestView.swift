@@ -50,12 +50,9 @@ struct LocationRequestView: View {
                         .font(.title3)
                         .foregroundColor(.white)
                     }
-                    
                 }
                 Spacer()
             }
-            
-            
         }
     }
 }

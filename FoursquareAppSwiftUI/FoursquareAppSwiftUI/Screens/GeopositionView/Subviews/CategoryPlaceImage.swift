@@ -8,7 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct CategoryPlaceMarker: View {
+struct CategoryPlaceImage: View {
     let url: URL?
     var body: some View {
         VStack{
@@ -31,7 +31,7 @@ struct CategoryPlaceMarker: View {
 
 struct CategoryPlaceImage_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryPlaceMarker(url:
+        CategoryPlaceImage(url:
                             URL(string: "https://ss3.4sqi.net/img/categories_v2/food/tapas_"))
     }
 }

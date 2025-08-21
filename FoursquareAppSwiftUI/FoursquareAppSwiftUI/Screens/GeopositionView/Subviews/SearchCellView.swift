@@ -18,16 +18,14 @@ struct SearchCellView: View {
                     Text(place.name)
                         .font(.title2)
                         .lineLimit(1)
-                        //.allowsTightening(true)
                     Text(place.categories.first?.name ?? "category not found")
                         .font(.system(size: 15))
                         .foregroundColor(Color(cgColor: UIColor.systemGray.cgColor))
                 }
                 .minimumScaleFactor(0.3)
                 Spacer()
-                CategoryPlaceMarker(
+                CategoryPlaceImage(
                 url:place.categories.first?.icon.iconURl(resolution: .small))
-                
             }
             .padding(.horizontal,5)
     }
