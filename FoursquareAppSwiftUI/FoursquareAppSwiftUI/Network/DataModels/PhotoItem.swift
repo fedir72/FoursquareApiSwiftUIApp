@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhotoItem: Decodable {
+struct PhotoItem: Decodable , Identifiable {
    let id: String?
    let created_at: String?
    let prefix: String?

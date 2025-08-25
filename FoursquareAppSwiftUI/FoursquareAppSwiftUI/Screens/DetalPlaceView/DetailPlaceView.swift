@@ -5,81 +5,97 @@
 //  Created by Fedii Ihor on 26.10.2022.
 //
 
+
 import SwiftUI
+import SDWebImageSwiftUI
+import SDWebImage
+
 
 struct DetailPlaceView: View {
-  //MARK: - properties
-    @EnvironmentObject var locationManager: LocationManager
-    @EnvironmentObject var dataSource: PlacesDataSource
-    
-    @State var place: Place
-    @State private var showTips = false
-    @AppStorage("columns") private var columns: Int = 3
   
-  //MARK: -padding calculation function and distance between cells
-   func columns(size: CGSize,
+  //MARK: - properties
+  @EnvironmentObject var locationManager: LocationManager
+  @EnvironmentObject var dataSource: PlacesDataSource
+  
+  @State var place: Place
+  @State private var selectedPhotoItem: PhotoItem?
+  @State private var showTips = false
+  @AppStorage("countColumns") private var columns: Int = 3
+  
+  //MARK: - padding and distance between cells calculation function
+  func columns(size: CGSize,
                countColumn: Int,
                spacing: CGFloat = 3,
                edgePadding: CGFloat = 3) -> [GridItem] {
-      // общая ширина, доступная для всех ячеек с учётом внешних отступов и промежутков
-      let totalSpacing = spacing * CGFloat(countColumn - 1) + edgePadding * 2
-      let itemWidth = (size.width - totalSpacing) / CGFloat(countColumn)
-      
-      return Array( repeating: GridItem(.fixed(itemWidth),spacing: spacing),
-                    count: countColumn )
-    }
+  //MARK: - общая ширина, доступная для всех ячеек с учётом внешних отступов и промежутков
+    let totalSpacing = spacing * CGFloat(countColumn - 1) + edgePadding * 2
+    let itemWidth = (size.width - totalSpacing) / CGFloat(countColumn)
+    return Array(repeating: GridItem(.fixed(itemWidth),
+                                     spacing: spacing),
+                                      count: countColumn )
+  }
   
   //MARK: - body
-    var body: some View {
-        GeometryReader { geo in
-          ScrollView(.vertical,showsIndicators: false) {
-            LazyVGrid(
-              columns:columns(size: geo.size,
-                              countColumn: columns),
-                              spacing: 3 ) {
-                 ForEach(dataSource.placePhotos, id: \.id) { photoItem in
-                 NavigationLink {
-                                //show the photo
-                   } label: {
-                        DetailGridCell(photoItem: photoItem)
-                            }
-                        }
-                    }
-
-                }
-               
-                .task {
-                 dataSource.loadPlacePhotos(id: place.id)
-                 dataSource.loadPlaceTips(id: place.id)
-                }
-        }
-        .sheet(isPresented: $showTips) {
-          UsersTipsView(tips: dataSource.placeTips)
-          }
-        .navigationTitle(place.name)
-        .toolbar {
-          
-            ToolbarItem(placement: .navigationBarTrailing) {
+  var body: some View {
+    GeometryReader { geo in
+      ScrollView(.vertical,showsIndicators: false) {
+        LazyVGrid(
+          columns:columns(size: geo.size,
+                          countColumn: columns),
+          spacing: 3 ) {
+            ForEach(dataSource.placePhotos, id: \.id) { photoItem in
               Button {
-                  showTips.toggle()
-                } label: {
-                  Text("Tips(\(dataSource.placeTips.count))") .bold()
-                }
+                // Загружаем полное изображение
+                print(photoItem.height ?? 0,photoItem.width ?? 0,"photo")
+                selectedPhotoItem = photoItem
+              } label: {
+                DetailGridCell(photoItem: photoItem)
+              }
             }
-          
-            ToolbarItem(placement: .navigationBarTrailing) {
-              Menu {
-                    Text("Cell size")
-                    Button { columns = 3 } label: { Text("Small x3") }
-                    Button { columns = 2 } label: { Text("Medium x2") }
-                    Button { columns = 1 } label: { Text("Large x1") }
-                } label: {
-                    Image(systemName: "eyeglasses")
-                }
-            }
-        }
+          }
+      }
+      .task {
+        dataSource.loadPlacePhotos(id: place.id)
+        dataSource.loadPlaceTips(id: place.id)
+      }
+      
     }
+    .sheet(item: $selectedPhotoItem) { item in
+        ZoomPhotoView(photoItem: item)
+    }
+    .sheet(isPresented: $showTips) {
+      UsersTipsView(tips: dataSource.placeTips)
+    }
+    .navigationTitle(place.name)
+    .toolbar {
+      
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button {
+          showTips.toggle()
+        } label: {
+          Text("Tips(\(dataSource.placeTips.count))") .bold()
+        }
+      }
+      
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Menu {
+          Text("Cell size")
+          Button { columns = 3 } label: { Text("Small x3") }
+          Button { columns = 2 } label: { Text("Medium x2") }
+          Button { columns = 1 } label: { Text("Large x1") }
+        } label: {
+          Image(systemName: "eyeglasses")
+        }
+      }
+    }
+    
+    
+  }
+  
+  
 }
+
+
 
 //struct DetailPlaceView_Previews: PreviewProvider {
 //    static var previews: some View {
