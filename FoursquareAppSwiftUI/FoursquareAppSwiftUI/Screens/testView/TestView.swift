@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct TestView: View {
+  
   var body: some View {
-    GeometryReader { geo in
-      ZStack(alignment: .center){
-        Image(systemName: "umbrella.fill") // фон для демонстрации
-          .resizable()
-          .tint(.brown)
-        Text("Привет, мир!")
-          .font(.largeTitle)
-          .padding()
-          .background(.ultraThinMaterial) // полупрозрачный размытой фон
-          .cornerRadius(15)
-        
-        
-      }
-    }.padding(40)
+      apologizeView()
   }
+  
+  //MARK: - apologizeView
+   private func apologizeView() -> some View {
+       VStack(spacing: 0) {
+           Image(systemName: "wrongwaysign")
+              .font(.largeTitle).bold()
+           Text("\nUnfortunately\nthis photo cannot be downloaded\nin full resolution")
+              .multilineTextAlignment(.center)
+              .font(.title2)
+       }
+     .foregroundStyle(.red)
+   }
+  
 }
 
 #Preview {

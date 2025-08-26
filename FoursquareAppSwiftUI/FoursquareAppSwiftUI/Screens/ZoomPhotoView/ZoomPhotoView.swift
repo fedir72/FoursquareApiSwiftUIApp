@@ -34,13 +34,12 @@ struct ZoomPhotoView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    infoHeaderView(photoItem.dateStr())
-                      .padding(20)
-                  
-                  if let w = photoItem.width,
-                     let h = photoItem.height,
-                     let url = photoItem.photoUrlStr(w: w, h: h) {
-                        photoView(with: url, containerSize: geo.size)
+                   // infoHeaderView(photoItem.dateStr())
+                   //   .padding(20)
+                    if let w = photoItem.width,
+                       let h = photoItem.height,
+                       let url = photoItem.photoUrlStr(w: w, h: h) {
+                           photoView(with: url, containerSize: geo.size)
                             .frame(width: geo.size.width, height: geo.size.height)
                     } else {
                         apologizeView()
@@ -49,7 +48,18 @@ struct ZoomPhotoView: View {
             }
         }
     }
-    
+  
+  //MARK: - apologizeView
+   private func apologizeView() -> some View {
+     VStack(spacing: 0) {
+         Image(systemName: "wrongwaysign")
+           .font(.largeTitle).bold()
+         Text("\nUnfortunately\nthis photo cannot be downloaded\nin full resolution")
+           .multilineTextAlignment(.center)
+           .font(.title2)
+     }
+     .foregroundStyle(.red)
+   }
   
   //MARK: - infoHeaderView
   private func infoHeaderView(_ dateText: String) -> some View {
@@ -139,16 +149,7 @@ struct ZoomPhotoView: View {
                 }
             }
     }
-    
-   //MARK: - apologizeView
-    private func apologizeView() -> some View {
-        VStack {
-            Image(systemName: "wrongwaysign").font(.largeTitle).bold()
-            Text("Unfortunately this photo cannot be downloaded in full resolution")
-                .font(.headline)
-        }
-    }
-  
+
   /// Ограничивает смещение картинки так, чтобы её края не уходили за границы экрана
   /// - Parameters:
   ///   - containerSize: размер контейнера, в котором показывается картинка (обычно размер экрана)

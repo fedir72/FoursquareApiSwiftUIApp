@@ -7,13 +7,17 @@
 
 import Foundation
 
-struct PhotoItem: Decodable , Identifiable {
+struct PhotoItem: Decodable , Identifiable, Equatable {
    let id: String?
    let created_at: String?
    let prefix: String?
    let suffix: String?
    let width: Int?
    let height: Int?
+  
+  static func == (lhs: PhotoItem, rhs: PhotoItem) -> Bool {
+      return lhs.id == rhs.id
+  }
 }
 
 extension PhotoItem {

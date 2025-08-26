@@ -11,6 +11,9 @@ import SDWebImageSwiftUI
 import SDWebImage
 
 
+
+
+
 struct DetailPlaceView: View {
   
   //MARK: - properties
@@ -18,7 +21,10 @@ struct DetailPlaceView: View {
   @EnvironmentObject var dataSource: PlacesDataSource
   
   @State var place: Place
-  @State private var selectedPhotoItem: PhotoItem?
+  @State  private var selectedPhotoIndex = 0 {
+    didSet { print( "index", selectedPhotoIndex ) }
+  }
+  @State private var showCarouselView = false
   @State private var showTips = false
   @AppStorage("countColumns") private var columns: Int = 3
   
@@ -27,48 +33,48 @@ struct DetailPlaceView: View {
                countColumn: Int,
                spacing: CGFloat = 3,
                edgePadding: CGFloat = 3) -> [GridItem] {
-  //MARK: - общая ширина, доступная для всех ячеек с учётом внешних отступов и промежутков
+    //MARK: - общая ширина, доступная для всех ячеек с учётом внешних отступов и промежутков
     let totalSpacing = spacing * CGFloat(countColumn - 1) + edgePadding * 2
     let itemWidth = (size.width - totalSpacing) / CGFloat(countColumn)
     return Array(repeating: GridItem(.fixed(itemWidth),
                                      spacing: spacing),
-                                      count: countColumn )
+                 count: countColumn )
   }
   
   //MARK: - body
   var body: some View {
     GeometryReader { geo in
       ScrollView(.vertical,showsIndicators: false) {
-        LazyVGrid(
-          columns:columns(size: geo.size,
-                          countColumn: columns),
-          spacing: 3 ) {
-            ForEach(dataSource.placePhotos, id: \.id) { photoItem in
-              Button {
-                // Загружаем полное изображение
-                print(photoItem.height ?? 0,photoItem.width ?? 0,"photo")
-                selectedPhotoItem = photoItem
-              } label: {
-                DetailGridCell(photoItem: photoItem)
+        LazyVGrid( columns:columns(size: geo.size,
+                                   countColumn: columns),
+                   spacing: 3 ) {
+          ForEach(dataSource.placePhotos) { photoItem in
+            
+            Button {
+              if let ind = dataSource.placePhotos.firstIndex(of: photoItem) {
+                selectedPhotoIndex = ind
+                showCarouselView.toggle()
+                
               }
+            } label: {
+              DetailGridCell(photoItem: photoItem)
             }
           }
+        }
       }
       .task {
         dataSource.loadPlacePhotos(id: place.id)
         dataSource.loadPlaceTips(id: place.id)
       }
-      
     }
-    .sheet(item: $selectedPhotoItem) { item in
-        ZoomPhotoView(photoItem: item)
+    .sheet(isPresented: $showCarouselView ) {
+      FullScreenPhotoCarouselView(selectedIndex: selectedPhotoIndex)
     }
     .sheet(isPresented: $showTips) {
       UsersTipsView(tips: dataSource.placeTips)
     }
     .navigationTitle(place.name)
     .toolbar {
-      
       ToolbarItem(placement: .navigationBarTrailing) {
         Button {
           showTips.toggle()
@@ -88,10 +94,7 @@ struct DetailPlaceView: View {
         }
       }
     }
-    
-    
   }
-  
   
 }
 
