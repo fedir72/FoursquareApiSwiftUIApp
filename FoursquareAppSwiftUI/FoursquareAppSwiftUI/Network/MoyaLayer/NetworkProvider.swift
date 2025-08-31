@@ -11,12 +11,10 @@ import Moya
 
 class NetworkProvider {
   
-  // MARK: - Singleton
-  static let shared = NetworkProvider()
   init() {}
 
   let foursquare = MoyaProvider<FoursquareService>()
-  //let openweather = MoyaProvider<OpenWeatherMapService>()
+  let openweather = MoyaProvider<OpenWeatherMapService>()
 
   // MARK: - Generic JSON Decoder
   private func decodeJSON<T: Decodable>(type: T.Type,
@@ -117,4 +115,24 @@ class NetworkProvider {
             responseType: [Tip].self,
             completion: completion)
   }
+  
+  
+  // MARK: - OpenWeatherMap Methods
+  func getCities(
+      term: String,
+      limit: Int = 10,
+      completion: @escaping (Result<[OpenMapCity], Error>) -> Void
+  ) {
+      openweather.request(.getCities(term: term, limit: limit)) { result in
+          switch result {
+          case .success(let response):
+              let decodedResult = self.decodeJSON(type: [OpenMapCity].self, from: response.data)
+              completion(decodedResult)
+          case .failure(let error):
+              completion(.failure(error))
+          }
+      }
+  }
+  
+  
 }

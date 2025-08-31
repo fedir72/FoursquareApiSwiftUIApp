@@ -17,8 +17,8 @@ struct FoursquareAppSwiftUIApp: App {
   
   var body: some Scene {
         WindowGroup {
-            MainView()
-          
+            //MainView()
+          TestView()
             .environmentObject(locationManager)
             .environmentObject(dataSource)
             

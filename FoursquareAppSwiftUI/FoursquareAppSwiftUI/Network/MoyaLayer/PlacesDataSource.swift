@@ -14,6 +14,7 @@ final class PlacesDataSource: ObservableObject {
     @Published var selectedPlace: Place? = nil      // getPlaceDetails
     @Published var placePhotos: [PhotoItem] = []    // getPlacePhotos
     @Published var placeTips: [Tip] = []           // getPlaceTips
+    @Published var cities: [OpenMapCity] = []
     
     private let networkProvider: NetworkProvider
     
@@ -91,4 +92,17 @@ final class PlacesDataSource: ObservableObject {
             }
         }
     }
+  
+  
+  func loadCities(by term: String, limit: Int) {
+    networkProvider.getCities(term: term, limit: limit) {[weak self] result in
+      switch result {
+        
+      case .success(let cityes):
+        self?.cities = cityes
+      case .failure(let error):
+        print("Ошибка загрузки Cityes: \(error.localizedDescription)")
+      }
+    }
+  }
 }

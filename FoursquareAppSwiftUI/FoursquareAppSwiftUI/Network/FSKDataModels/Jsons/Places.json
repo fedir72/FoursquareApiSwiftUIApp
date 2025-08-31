@@ -1,0 +1,348 @@
+{
+    "results": [
+        {
+            "fsq_id": "4f40e48be4b0f7b4598dd148",
+            "categories": [
+                {
+                    "id": 17026,
+                    "name": "Mobile Phone Store",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/mobilephoneshop_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 19265,
+            "geocodes": {
+                "main": {
+                    "latitude": 50.000835,
+                    "longitude": 36.2975
+                }
+            },
+            "link": "/v3/places/4f40e48be4b0f7b4598dd148",
+            "location": {
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": ""
+            },
+            "name": "DeMobileS",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "51daa42f498e309c759ce482",
+            "categories": [
+                {
+                    "id": 17026,
+                    "name": "Mobile Phone Store",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/mobilephoneshop_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 19379,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.992292,
+                    "longitude": 36.233903
+                }
+            },
+            "link": "/v3/places/51daa42f498e309c759ce482",
+            "location": {
+                "address": "Ул. Пушкинская, 5",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "Ул. Пушкинская, 5, Харків",
+                "locality": "Kharkiv",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "ReMobile",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "4d55266958856dcbecfd456d",
+            "categories": [
+                {
+                    "id": 17026,
+                    "name": "Mobile Phone Store",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/mobilephoneshop_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 20922,
+            "geocodes": {
+                "main": {
+                    "latitude": 50.007841,
+                    "longitude": 36.237853
+                }
+            },
+            "link": "/v3/places/4d55266958856dcbecfd456d",
+            "location": {
+                "address": "вул. Сумська, 53",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "вул. Сумська, 53, Харків",
+                "locality": "Kharkiv",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "Vodafone",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "4e06f748d1640223a499fee0",
+            "categories": [
+                {
+                    "id": 11167,
+                    "name": "Technology Business",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/technology_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 18980,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.987837,
+                    "longitude": 36.231349
+                }
+            },
+            "link": "/v3/places/4e06f748d1640223a499fee0",
+            "location": {
+                "address": "пл. Павловская, 8",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "пл. Павловская, 8, Харків",
+                "locality": "Kharkiv",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "Интертелеком",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "4f314b17e4b0871fe5a1ad8c",
+            "categories": [
+                {
+                    "id": 17026,
+                    "name": "Mobile Phone Store",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/mobilephoneshop_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 21761,
+            "geocodes": {
+                "main": {
+                    "latitude": 50.013503,
+                    "longitude": 36.227142
+                }
+            },
+            "link": "/v3/places/4f314b17e4b0871fe5a1ad8c",
+            "location": {
+                "address": "просп. Леніна, 7-В",
+                "country": "UA",
+                "cross_street": "ТЦ «Prisma»",
+                "formatted_address": "просп. Леніна, 7-В (ТЦ «Prisma»), Харків, 61022",
+                "locality": "Kharkiv",
+                "postcode": "61022",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "Apple Mania",
+            "related_places": {
+                "parent": {
+                    "fsq_id": "4e3a8443a809ec55443c2e19",
+                    "name": "ТЦ «Prisma»"
+                }
+            },
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "53e8a3b6498e455a06074ac6",
+            "categories": [
+                {
+                    "id": 17026,
+                    "name": "Mobile Phone Store",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/mobilephoneshop_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 12909,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.943547,
+                    "longitude": 36.301824
+                }
+            },
+            "link": "/v3/places/53e8a3b6498e455a06074ac6",
+            "location": {
+                "address": "вул. Героїв Сталінграда, 136-Г",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "вул. Героїв Сталінграда, 136-Г"
+            },
+            "name": "МТС",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "53827aab498e0086eaeb8988",
+            "categories": [
+                {
+                    "id": 17026,
+                    "name": "Mobile Phone Store",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/mobilephoneshop_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 13842,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.945627,
+                    "longitude": 36.261046
+                }
+            },
+            "link": "/v3/places/53827aab498e0086eaeb8988",
+            "location": {
+                "address": "Пр.Гагарина 181; ТРЦ \"Sun Mall\"",
+                "country": "UA",
+                "cross_street": "Одесская",
+                "formatted_address": "Пр.Гагарина 181; ТРЦ \"Sun Mall\" (Одесская), Харків, 61124",
+                "locality": "Kharkiv",
+                "postcode": "61124",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "Device Market",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "5c2ca8e23fffb400251beba0",
+            "categories": [
+                {
+                    "id": 17026,
+                    "name": "Mobile Phone Store",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/mobilephoneshop_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 13913,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.945034,
+                    "longitude": 36.398
+                }
+            },
+            "link": "/v3/places/5c2ca8e23fffb400251beba0",
+            "location": {
+                "address": "Московский проспект 274",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "Московский проспект 274, Харків, 61000",
+                "locality": "Kharkiv",
+                "postcode": "61000",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "Vodafone",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "50a7b4f4e4b03f2b08834eaf",
+            "categories": [
+                {
+                    "id": 17026,
+                    "name": "Mobile Phone Store",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/mobilephoneshop_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 15171,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.964966,
+                    "longitude": 36.320475
+                }
+            },
+            "link": "/v3/places/50a7b4f4e4b03f2b08834eaf",
+            "location": {
+                "address": "просп. Петра Григоренка, 3",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "просп. Петра Григоренка, 3, Харків",
+                "locality": "Kharkiv",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "Алло",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "51665169e4b0642f8cc63430",
+            "categories": [
+                {
+                    "id": 17026,
+                    "name": "Mobile Phone Store",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/mobilephoneshop_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 17805,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.979977,
+                    "longitude": 36.245793
+                }
+            },
+            "link": "/v3/places/51665169e4b0642f8cc63430",
+            "location": {
+                "address": "просп. Гагаріна, 22",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "просп. Гагаріна, 22, Харків",
+                "locality": "Kharkiv",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "SMS'ka",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        }
+    ],
+    "context": {
+        "geo_bounds": {
+            "circle": {
+                "center": {
+                    "latitude": 49.82850646972656,
+                    "longitude": 36.326904296875
+                },
+                "radius": 22000
+            }
+        }
+    }
+}

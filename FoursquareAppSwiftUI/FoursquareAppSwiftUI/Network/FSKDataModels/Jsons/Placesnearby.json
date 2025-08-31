@@ -1,0 +1,326 @@
+{
+    "results": [
+        {
+            "fsq_id": "541327ea498ee067d851a158",
+            "categories": [
+                {
+                    "id": 11045,
+                    "name": "Bank",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 12980,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.940907,
+                    "longitude": 36.376236
+                }
+            },
+            "link": "/v3/places/541327ea498ee067d851a158",
+            "location": {
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": ""
+            },
+            "name": "Uni Credit Bank",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "4fba3f88e4b08ee511bc93bb",
+            "categories": [
+                {
+                    "id": 11045,
+                    "name": "Bank",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 17417,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.980302,
+                    "longitude": 36.266257
+                }
+            },
+            "link": "/v3/places/4fba3f88e4b08ee511bc93bb",
+            "location": {
+                "address": "просп. Леніна, 64",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "просп. Леніна, 64, Харків",
+                "locality": "Kharkiv",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "OTP Bank / ОТП Банк відділення «Радоніжське»",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "509a993e3d7c42e6555fe225",
+            "categories": [
+                {
+                    "id": 11045,
+                    "name": "Bank",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 16971,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.97424,
+                    "longitude": 36.255984
+                }
+            },
+            "link": "/v3/places/509a993e3d7c42e6555fe225",
+            "location": {
+                "address": "просп. Гагаріна, 66/68",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "просп. Гагаріна, 66/68, Харків, 61140",
+                "locality": "Kharkiv",
+                "postcode": "61140",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "OTP Bank / ОТП Банк відділення «Державинське»",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "4dde0ef3227106a58b82cdd8",
+            "categories": [
+                {
+                    "id": 11045,
+                    "name": "Bank",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 19228,
+            "geocodes": {
+                "main": {
+                    "latitude": 50.001391,
+                    "longitude": 36.337967
+                }
+            },
+            "link": "/v3/places/4dde0ef3227106a58b82cdd8",
+            "location": {
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "Харків",
+                "locality": "Kharkiv",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "Erste Bank",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "50599427e4b0badb9100a3af",
+            "categories": [
+                {
+                    "id": 11045,
+                    "name": "Bank",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 17001,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.974513,
+                    "longitude": 36.255954
+                }
+            },
+            "link": "/v3/places/50599427e4b0badb9100a3af",
+            "location": {
+                "address": "просп. Гагарiна, 43",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "просп. Гагарiна, 43, Харків",
+                "locality": "Kharkiv",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "UniCredit Bank",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "509a993f3d7c42e6555fe274",
+            "categories": [
+                {
+                    "id": 11045,
+                    "name": "Bank",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 18243,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.986263,
+                    "longitude": 36.256324
+                }
+            },
+            "link": "/v3/places/509a993f3d7c42e6555fe274",
+            "location": {
+                "address": "вул. Богдана Хмельницького, 24",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "вул. Богдана Хмельницького, 24, Харків, 61050",
+                "locality": "Kharkiv",
+                "postcode": "61050",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "OTP Bank / ОТП Банк відділення «Протон»",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "4f83341be4b0a458bca9d5eb",
+            "categories": [
+                {
+                    "id": 11045,
+                    "name": "Bank",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 18707,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.996729,
+                    "longitude": 36.336973
+                }
+            },
+            "link": "/v3/places/4f83341be4b0a458bca9d5eb",
+            "location": {
+                "address": "просп. 50 річчя ВЛКСМ, 56",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "просп. 50 річчя ВЛКСМ, 56, Харків",
+                "locality": "Kharkiv",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "OTP Bank / ОТП Банк відділення «Салтівське»",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "602c527cdaa9a040639faa76",
+            "categories": [],
+            "chains": [],
+            "distance": 8082,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.886976,
+                    "longitude": 36.394005
+                }
+            },
+            "link": "/v3/places/602c527cdaa9a040639faa76",
+            "location": {
+                "address": "62482, Харківська область, Харків, с. Докучаевское, Польовий в'їзд, 1",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "62482, Харківська область, Харків, с. Докучаевское, Польовий в'їзд, 1, Харків, 62482",
+                "locality": "Kharkiv",
+                "postcode": "62482",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "Raiffeisen Bank Aval",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "4cd2758af4bfb1f7c6f9352f",
+            "categories": [
+                {
+                    "id": 11045,
+                    "name": "Bank",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 19223,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.989425,
+                    "longitude": 36.228335
+                }
+            },
+            "link": "/v3/places/4cd2758af4bfb1f7c6f9352f",
+            "location": {
+                "address": "вул. Квітки-Основ'яненка, 11",
+                "country": "UA",
+                "cross_street": "",
+                "formatted_address": "вул. Квітки-Основ'яненка, 11, Харків, 61003",
+                "locality": "Kharkiv",
+                "postcode": "61003",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "OTP Bank / ОТП Банк відділення «Покровське»",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        },
+        {
+            "fsq_id": "4df9a8ab18a8ab1870bbce64",
+            "categories": [
+                {
+                    "id": 11045,
+                    "name": "Bank",
+                    "icon": {
+                        "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
+                        "suffix": ".png"
+                    }
+                }
+            ],
+            "chains": [],
+            "distance": 19537,
+            "geocodes": {
+                "main": {
+                    "latitude": 49.990918,
+                    "longitude": 36.222334
+                }
+            },
+            "link": "/v3/places/4df9a8ab18a8ab1870bbce64",
+            "location": {
+                "address": "вул. Енгельса, 21",
+                "country": "UA",
+                "formatted_address": "вул. Енгельса, 21, Харків, 61012",
+                "locality": "Kharkiv",
+                "postcode": "61012",
+                "region": "Kharkiv Oblast"
+            },
+            "name": "OTP Bank / ОТП Банк відділення «Благовіщенське»",
+            "related_places": {},
+            "timezone": "Europe/Kiev"
+        }
+    ]
+}
+

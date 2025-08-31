@@ -1,0 +1,50 @@
+[
+    {
+        "name": "New Orleans",
+        "local_names": {
+            "ko": "뉴올리언스",
+            "kn": "ಹೊಸ ಒರ್ಲೀನ್ಸ್",
+            "ru": "Новый Орлеан",
+            "es": "Nueva Orleans",
+            "br": "Orleañs Nevez",
+            "vi": "New Orleans",
+            "ca": "Nova Orleans",
+            "ja": "ニューオーリンズ",
+            "en": "New Orleans",
+            "fr": "La Nouvelle-Orléans",
+            "oc": "Nòva Orleans",
+            "zh": "新奥尔良/紐奧良"
+        },
+        "lat": 29.9759983,
+        "lon": -90.0782127,
+        "country": "US",
+        "state": "Louisiana"
+    },
+    {
+        "name": "New Orleans",
+        "lat": 13.1041167,
+        "lon": -59.6190236,
+        "country": "BB"
+    },
+    {
+        "name": "New Orleans",
+        "lat": -33.715531,
+        "lon": 18.9869513,
+        "country": "ZA",
+        "state": "Western Cape"
+    },
+    {
+        "name": "New Orleans",
+        "lat": 9.6383934,
+        "lon": -74.6123319,
+        "country": "CO",
+        "state": "Magdalena"
+    },
+    {
+        "name": "New Orleans",
+        "lat": 13.6651073,
+        "lon": -85.3975439,
+        "country": "NI",
+        "state": "Jinotega"
+    }
+]

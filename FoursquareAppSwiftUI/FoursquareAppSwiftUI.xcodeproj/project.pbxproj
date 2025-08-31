@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		884ABF9A2E60C8EB00177A6C /* LocationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884ABF992E60C8EB00177A6C /* LocationModels.swift */; };
+		884ABFA82E60DB4F00177A6C /* OpenWeaterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884ABFA72E60DB4000177A6C /* OpenWeaterModels.swift */; };
+		884ABFAA2E60DBF600177A6C /* OpenWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884ABFA92E60DBE600177A6C /* OpenWeatherService.swift */; };
 		8853A5932E5A0ED500B5AECF /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853A5922E5A0ED500B5AECF /* TestView.swift */; };
 		8853A5952E5A63A300B5AECF /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853A5942E5A639500B5AECF /* StringExtensions.swift */; };
 		886AAC662E57421800EDBFBF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886AAC652E57421100EDBFBF /* LoadingView.swift */; };
+		887918C52E647AF000DC7EF4 /* searchCityesresult.json in Resources */ = {isa = PBXBuildFile; fileRef = 887918C42E647AF000DC7EF4 /* searchCityesresult.json */; };
+		887918C82E6485C500DC7EF4 /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887918C72E6485C500DC7EF4 /* RealmModels.swift */; };
+		887918CB2E64868B00DC7EF4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 887918CA2E64868B00DC7EF4 /* Realm */; };
+		887918CD2E64868B00DC7EF4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 887918CC2E64868B00DC7EF4 /* RealmSwift */; };
+		887918CF2E64877000DC7EF4 /* RealmCityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887918CE2E64877000DC7EF4 /* RealmCityManager.swift */; };
 		888A38862E5C8BE100BD5F27 /* FullScreenPhotoCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888A38852E5C8BD600BD5F27 /* FullScreenPhotoCarouselView.swift */; };
 		888A38992E5CB4BD00BD5F27 /* Photos.json in Resources */ = {isa = PBXBuildFile; fileRef = 888A38952E5CB4BC00BD5F27 /* Photos.json */; };
 		888A389A2E5CB4BD00BD5F27 /* Error.json in Resources */ = {isa = PBXBuildFile; fileRef = 888A38962E5CB4BC00BD5F27 /* Error.json */; };
@@ -48,9 +56,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		884ABF992E60C8EB00177A6C /* LocationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModels.swift; sourceTree = "<group>"; };
+		884ABFA72E60DB4000177A6C /* OpenWeaterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeaterModels.swift; sourceTree = "<group>"; };
+		884ABFA92E60DBE600177A6C /* OpenWeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherService.swift; sourceTree = "<group>"; };
 		8853A5922E5A0ED500B5AECF /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		8853A5942E5A639500B5AECF /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		886AAC652E57421100EDBFBF /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		887918C42E647AF000DC7EF4 /* searchCityesresult.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = searchCityesresult.json; sourceTree = "<group>"; };
+		887918C72E6485C500DC7EF4 /* RealmModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
+		887918CE2E64877000DC7EF4 /* RealmCityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCityManager.swift; sourceTree = "<group>"; };
 		888A38852E5C8BD600BD5F27 /* FullScreenPhotoCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoCarouselView.swift; sourceTree = "<group>"; };
 		888A38922E5CB4BC00BD5F27 /* Place.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Place.json; sourceTree = "<group>"; };
 		888A38932E5CB4BC00BD5F27 /* Places.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Places.json; sourceTree = "<group>"; };
@@ -92,6 +106,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887918CD2E64868B00DC7EF4 /* RealmSwift in Frameworks */,
+				887918CB2E64868B00DC7EF4 /* Realm in Frameworks */,
 				BDF9DE522909B9A500E8ECE6 /* SDWebImageSwiftUI in Frameworks */,
 				BDCA3E8A2908626F006420E4 /* Moya in Frameworks */,
 			);
@@ -100,6 +116,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		884ABFA62E60DB1E00177A6C /* OpenWewaterModels */ = {
+			isa = PBXGroup;
+			children = (
+				884ABFA72E60DB4000177A6C /* OpenWeaterModels.swift */,
+				887918C32E6478F900DC7EF4 /* Jsons */,
+			);
+			path = OpenWewaterModels;
+			sourceTree = "<group>";
+		};
+		884ABFAB2E60DDAF00177A6C /* MoyaServices */ = {
+			isa = PBXGroup;
+			children = (
+				BDCA3E85290855F3006420E4 /* FoursquareService.swift */,
+				884ABFA92E60DBE600177A6C /* OpenWeatherService.swift */,
+			);
+			path = MoyaServices;
+			sourceTree = "<group>";
+		};
 		8853A58F2E5A0EA500B5AECF /* testView */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +156,23 @@
 				88AF04A12E59CD8B00F18BAD /* ZoomPhotoView.swift */,
 			);
 			path = ZoomPhotoView;
+			sourceTree = "<group>";
+		};
+		887918C32E6478F900DC7EF4 /* Jsons */ = {
+			isa = PBXGroup;
+			children = (
+				887918C42E647AF000DC7EF4 /* searchCityesresult.json */,
+			);
+			path = Jsons;
+			sourceTree = "<group>";
+		};
+		887918C62E64859C00DC7EF4 /* persistant */ = {
+			isa = PBXGroup;
+			children = (
+				887918C72E6485C500DC7EF4 /* RealmModels.swift */,
+				887918CE2E64877000DC7EF4 /* RealmCityManager.swift */,
+			);
+			path = persistant;
 			sourceTree = "<group>";
 		};
 		8884970B2E5511A80019FBC7 /* CategoryView */ = {
@@ -208,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				BDAA355B2956314D007CD6F7 /* LocationManager.swift */,
+				884ABF992E60C8EB00177A6C /* LocationModels.swift */,
 			);
 			path = LocationManager;
 			sourceTree = "<group>";
@@ -233,6 +285,7 @@
 			children = (
 				BDCA3E6E290844DC006420E4 /* FoursquareAppSwiftUIApp.swift */,
 				BDCA3E72290844DD006420E4 /* Assets.xcassets */,
+				887918C62E64859C00DC7EF4 /* persistant */,
 				BDAA355D29563157007CD6F7 /* LocationManager */,
 				BDF9DE532909BF3400E8ECE6 /* Extensions */,
 				BDCA3E7F290852A9006420E4 /* Network */,
@@ -272,12 +325,13 @@
 			isa = PBXGroup;
 			children = (
 				BDCA3E8129085575006420E4 /* MoyaLayer */,
-				BDCA3E8029085555006420E4 /* DataModels */,
+				884ABFA62E60DB1E00177A6C /* OpenWewaterModels */,
+				BDCA3E8029085555006420E4 /* FSKDataModels */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		BDCA3E8029085555006420E4 /* DataModels */ = {
+		BDCA3E8029085555006420E4 /* FSKDataModels */ = {
 			isa = PBXGroup;
 			children = (
 				888A38982E5CB4BC00BD5F27 /* Jsons */,
@@ -287,7 +341,7 @@
 				BDCA3E8B290865B0006420E4 /* placesAndNearbyModels.swift */,
 				BDCA3E8D290865B0006420E4 /* TipsModels.swift */,
 			);
-			path = DataModels;
+			path = FSKDataModels;
 			sourceTree = "<group>";
 		};
 		BDCA3E8129085575006420E4 /* MoyaLayer */ = {
@@ -295,7 +349,7 @@
 			children = (
 				88DEBC7C2E51EF46005C1908 /* PlacesDataSource.swift */,
 				88DEBC7A2E51ED49005C1908 /* NetworkProvider.swift */,
-				BDCA3E85290855F3006420E4 /* FoursquareService.swift */,
+				884ABFAB2E60DDAF00177A6C /* MoyaServices */,
 			);
 			path = MoyaLayer;
 			sourceTree = "<group>";
@@ -346,6 +400,8 @@
 			packageProductDependencies = (
 				BDCA3E892908626F006420E4 /* Moya */,
 				BDF9DE512909B9A500E8ECE6 /* SDWebImageSwiftUI */,
+				887918CA2E64868B00DC7EF4 /* Realm */,
+				887918CC2E64868B00DC7EF4 /* RealmSwift */,
 			);
 			productName = FoursquareAppSwiftUI;
 			productReference = BDCA3E6B290844DC006420E4 /* FoursquareAppSwiftUI.app */;
@@ -378,6 +434,7 @@
 			packageReferences = (
 				BDCA3E882908626F006420E4 /* XCRemoteSwiftPackageReference "Moya" */,
 				BDF9DE502909B9A500E8ECE6 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				887918C92E64868B00DC7EF4 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = BDCA3E6C290844DC006420E4 /* Products */;
 			projectDirPath = "";
@@ -393,6 +450,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887918C52E647AF000DC7EF4 /* searchCityesresult.json in Resources */,
 				BDCA3E76290844DD006420E4 /* Preview Assets.xcassets in Resources */,
 				888A38992E5CB4BD00BD5F27 /* Photos.json in Resources */,
 				888A389A2E5CB4BD00BD5F27 /* Error.json in Resources */,
@@ -412,14 +470,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				8853A5932E5A0ED500B5AECF /* TestView.swift in Sources */,
+				887918C82E6485C500DC7EF4 /* RealmModels.swift in Sources */,
 				BDF9DE552909BF4F00E8ECE6 /* ViewExtensions.swift in Sources */,
 				BDBB7BCE294BCC9F00515A8C /* Categories.swift in Sources */,
 				BDCA3E71290844DC006420E4 /* GeoPositionView.swift in Sources */,
 				BDCA3E92290865B0006420E4 /* TipsModels.swift in Sources */,
+				884ABF9A2E60C8EB00177A6C /* LocationModels.swift in Sources */,
 				88DEBC7D2E51EF50005C1908 /* PlacesDataSource.swift in Sources */,
 				88DEBC7B2E51ED5A005C1908 /* NetworkProvider.swift in Sources */,
 				BDBB7BCC294BC43600515A8C /* CategoryPlaceImage.swift in Sources */,
 				BDCA3E90290865B0006420E4 /* placesAndNearbyModels.swift in Sources */,
+				887918CF2E64877000DC7EF4 /* RealmCityManager.swift in Sources */,
 				886AAC662E57421800EDBFBF /* LoadingView.swift in Sources */,
 				BDE38F022909CA200098C16B /* DetailPlaceView.swift in Sources */,
 				BDCA3E6F290844DC006420E4 /* FoursquareAppSwiftUIApp.swift in Sources */,
@@ -434,7 +495,9 @@
 				BDCA3E91290865B0006420E4 /* ContextModels.swift in Sources */,
 				88AF04A22E59CD9D00F18BAD /* ZoomPhotoView.swift in Sources */,
 				BDCA3E9629086BDF006420E4 /* SearchCellView.swift in Sources */,
+				884ABFAA2E60DBF600177A6C /* OpenWeatherService.swift in Sources */,
 				BDCA3E94290865B0006420E4 /* PhotoItem.swift in Sources */,
+				884ABFA82E60DB4F00177A6C /* OpenWeaterModels.swift in Sources */,
 				BDAA355F295636DE007CD6F7 /* LocationRequestView.swift in Sources */,
 				BDCA2F502958A56600F43B4A /* Settings.swift in Sources */,
 				BDAA355C2956314D007CD6F7 /* LocationManager.swift in Sources */,
@@ -643,6 +706,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		887918C92E64868B00DC7EF4 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		BDCA3E882908626F006420E4 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -662,6 +733,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		887918CA2E64868B00DC7EF4 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 887918C92E64868B00DC7EF4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		887918CC2E64868B00DC7EF4 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 887918C92E64868B00DC7EF4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		BDCA3E892908626F006420E4 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BDCA3E882908626F006420E4 /* XCRemoteSwiftPackageReference "Moya" */;

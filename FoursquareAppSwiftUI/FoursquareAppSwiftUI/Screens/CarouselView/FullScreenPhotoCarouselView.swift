@@ -59,11 +59,10 @@ struct FullScreenPhotoCarouselView: View {
                       .clipShape(Capsule())
                       .shadow(color: .black.opacity(0.7), radius: 4)
                 }
-                
-                // Панель кнопок
+          
                 VStack {
                     Spacer()
-                   //MAR: - navigation buttons
+                   //MARK: - navigation buttons
                     HStack(spacing: 15) {
                         Button {
                             if selectedIndex > 0 {

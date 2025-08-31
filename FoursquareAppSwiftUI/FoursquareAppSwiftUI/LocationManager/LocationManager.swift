@@ -7,6 +7,7 @@
 
 //import CoreLocation
 import MapKit
+import Foundation
 
 enum MapDetails {
     static let startLocation = CLLocationCoordinate2D(latitude: 35.658581,
@@ -75,3 +76,47 @@ extension LocationManager: CLLocationManagerDelegate {
         print("Failed to get user location: \(error.localizedDescription)")
     }
 }
+
+//extension LocationManager {
+//    func searchCities(query: String, completion: @escaping ([City]) -> Void) {
+//        let request = MKLocalSearch.Request()
+//        request.naturalLanguageQuery = query
+//        request.resultTypes = .address  // ищем именно адреса/города
+//
+//        let search = MKLocalSearch(request: request)
+//        search.start { response, error in
+//            if let error = error {
+//                print("Ошибка поиска: \(error.localizedDescription)")
+//                completion([])
+//                return
+//            }
+//            
+//            guard let response = response else {
+//                completion([])
+//                return
+//            }
+//            
+//            let cities: [City] = response.mapItems.compactMap { item in
+//                guard let name = item.name else { return nil }
+//                let country = item.placemark.country
+//                let coordinate = item.placemark.coordinate
+//                let timeZone = item.timeZone
+//                
+//                return City(name: name,
+//                            country: country,
+//                            coordinate: coordinate,
+//                            timeZone: timeZone)
+//            }
+//            
+//            completion(cities)
+//        }
+//    }
+//}
+
+//locationManager.searchCities(query: "Tokyo") { results in
+//    for city in results {
+//        print(city.name ?? "Без названия",
+//              city.placemark.coordinate.latitude,
+//              city.placemark.coordinate.longitude)
+//    }
+//}
