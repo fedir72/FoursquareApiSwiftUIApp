@@ -12,9 +12,9 @@ struct ApisOpenweather {
     static  let mainUrlGeo: String = "https://api.openweathermap.org/"
     static  let mainUrl: String = "https://api.openweathermap.org/data/"
     static  let id: String = "b66e60708f68ae585271c30665c1382c"
-   // static  let id2: String = "b66e60708f68ae585271c30665c1382c"
+    static  let id2: String = "b66e60708f68ae585271c30665c1382c"
 }
-
+//MARK: - urlStr example
 //https://api.openweathermap.org/geo/1.0/direct?q=Red&limit=10&appid=b66e60708f68ae585271c30665c1382c
 
 enum OpenWeatherMapService {

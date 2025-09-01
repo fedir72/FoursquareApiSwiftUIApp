@@ -6,21 +6,25 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 
 let screen = UIScreen.main.bounds
 
 @main
-struct FoursquareAppSwiftUIApp: App {
+struct FoursquareAppSwiftUIApp: SwiftUI.App {
   @StateObject private var locationManager = LocationManager()
   @StateObject private var dataSource = PlacesDataSource(networkProvider: NetworkProvider())
   
+  init() { CitySeeder.seedIfNeeded() }
+  
   var body: some Scene {
         WindowGroup {
-            //MainView()
-          TestView()
+        //MainView()
+          StartListView()
             .environmentObject(locationManager)
             .environmentObject(dataSource)
+          
             
         }
     }

@@ -7,12 +7,7 @@
 
 
 import SwiftUI
-import SDWebImageSwiftUI
 import SDWebImage
-
-
-
-
 
 struct DetailPlaceView: View {
   

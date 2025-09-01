@@ -8,7 +8,10 @@
 import Foundation
 
 
-struct OpenMapCity: Decodable , Identifiable {
+struct OpenMapCity: Decodable ,
+                    Identifiable,
+                    CityRepresentable {
+  
     var id: String { "\(name)-\(country ?? "not found")-\(lat)-\(lon)" }
   
     let local_names: [String:String]?

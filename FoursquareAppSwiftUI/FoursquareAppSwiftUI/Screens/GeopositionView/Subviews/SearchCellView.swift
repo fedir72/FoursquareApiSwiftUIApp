@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+import SDWebImage//SwiftUI
 
 struct SearchCellView: View {
     

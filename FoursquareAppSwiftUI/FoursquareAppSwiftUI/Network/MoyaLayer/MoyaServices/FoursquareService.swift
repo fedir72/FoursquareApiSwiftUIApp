@@ -11,6 +11,7 @@ import Moya
 let gpapikey = "fsq32dzAV8r/OXuMCplCeaU12WsxRFAuKZeXRlByPc0PfS0="
 let somekey = "fsq3Tl7FUUXvL0+OQj4iQLnCepvCUOjR6Vzxhp3QZjknmj8="
 
+//MARK: - urlStr examples
 //https://api.foursquare.com/v3/places/search?query=mobile
 //https://api.foursquare.com/v3/places/56ebc76138fa609a6ee2e560/photos
 //https://api.foursquare.com/v3/places/nearby?query=mobile
