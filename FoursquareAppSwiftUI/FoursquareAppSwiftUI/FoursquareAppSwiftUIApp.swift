@@ -13,6 +13,7 @@ let screen = UIScreen.main.bounds
 
 @main
 struct FoursquareAppSwiftUIApp: SwiftUI.App {
+  
   @StateObject private var locationManager = LocationManager()
   @StateObject private var dataSource = PlacesDataSource(networkProvider: NetworkProvider())
   

@@ -30,8 +30,8 @@
 		88DEBC7B2E51ED5A005C1908 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DEBC7A2E51ED49005C1908 /* NetworkProvider.swift */; };
 		88DEBC7D2E51EF50005C1908 /* PlacesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DEBC7C2E51EF46005C1908 /* PlacesDataSource.swift */; };
 		88EC68652E6597A30094D0F9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EC68642E6597960094D0F9 /* Protocols.swift */; };
-		88EC68682E65C7A90094D0F9 /* ShowCitySearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EC68672E65C7A90094D0F9 /* ShowCitySearchResultView.swift */; };
-		BD6940A6294E0144000AE3BB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6940A5294E0144000AE3BB /* MainView.swift */; };
+		88EC68682E65C7A90094D0F9 /* CitySearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EC68672E65C7A90094D0F9 /* CitySearchResultView.swift */; };
+		BD6940A6294E0144000AE3BB /* DiscoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6940A5294E0144000AE3BB /* DiscoveryView.swift */; };
 		BDA31AE529538E2E0069E38F /* DetailGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA31AE429538E2E0069E38F /* DetailGridCell.swift */; };
 		BDA31AE829547F6C0069E38F /* UsersTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA31AE729547F6C0069E38F /* UsersTipsView.swift */; };
 		BDAA355C2956314D007CD6F7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAA355B2956314D007CD6F7 /* LocationManager.swift */; };
@@ -77,8 +77,8 @@
 		88DEBC7A2E51ED49005C1908 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		88DEBC7C2E51EF46005C1908 /* PlacesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesDataSource.swift; sourceTree = "<group>"; };
 		88EC68642E6597960094D0F9 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		88EC68672E65C7A90094D0F9 /* ShowCitySearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCitySearchResultView.swift; sourceTree = "<group>"; };
-		BD6940A5294E0144000AE3BB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		88EC68672E65C7A90094D0F9 /* CitySearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchResultView.swift; sourceTree = "<group>"; };
+		BD6940A5294E0144000AE3BB /* DiscoveryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryView.swift; sourceTree = "<group>"; };
 		BDA31AE429538E2E0069E38F /* DetailGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailGridCell.swift; sourceTree = "<group>"; };
 		BDA31AE729547F6C0069E38F /* UsersTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTipsView.swift; sourceTree = "<group>"; };
 		BDAA355B2956314D007CD6F7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -118,13 +118,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		884ABFA62E60DB1E00177A6C /* OpenWewaterModels */ = {
+		884ABFA62E60DB1E00177A6C /* OpenWeatherDataModels */ = {
 			isa = PBXGroup;
 			children = (
 				887918C32E6478F900DC7EF4 /* Jsons */,
 				884ABFA72E60DB4000177A6C /* OpenWeaterModels.swift */,
 			);
-			path = OpenWewaterModels;
+			path = OpenWeatherDataModels;
 			sourceTree = "<group>";
 		};
 		884ABFAB2E60DDAF00177A6C /* MoyaServices */ = {
@@ -136,12 +136,12 @@
 			path = MoyaServices;
 			sourceTree = "<group>";
 		};
-		8853A58F2E5A0EA500B5AECF /* ShowCityRealmView */ = {
+		8853A58F2E5A0EA500B5AECF /* StartListView */ = {
 			isa = PBXGroup;
 			children = (
 				8853A5922E5A0ED500B5AECF /* StartListView.swift */,
 			);
-			path = ShowCityRealmView;
+			path = StartListView;
 			sourceTree = "<group>";
 		};
 		886AAC642E5741FF00EDBFBF /* LoadingView */ = {
@@ -189,7 +189,7 @@
 		8884970C2E5515910019FBC7 /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				BD6940A5294E0144000AE3BB /* MainView.swift */,
+				BD6940A5294E0144000AE3BB /* DiscoveryView.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -242,7 +242,7 @@
 		88EC68662E65C76F0094D0F9 /* ShowCitySearchResultView */ = {
 			isa = PBXGroup;
 			children = (
-				88EC68672E65C7A90094D0F9 /* ShowCitySearchResultView.swift */,
+				88EC68672E65C7A90094D0F9 /* CitySearchResultView.swift */,
 			);
 			path = ShowCitySearchResultView;
 			sourceTree = "<group>";
@@ -316,18 +316,18 @@
 		BDCA3E7C29085242006420E4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				8853A58F2E5A0EA500B5AECF /* StartListView */,
 				88EC68662E65C76F0094D0F9 /* ShowCitySearchResultView */,
-				888A38842E5C8BBB00BD5F27 /* CarouselView */,
-				8853A58F2E5A0EA500B5AECF /* ShowCityRealmView */,
 				886AAC642E5741FF00EDBFBF /* LoadingView */,
-				887080AD2E566C5700C2DB74 /* ZoomPhotoView */,
 				8884970C2E5515910019FBC7 /* MainView */,
-				BDA31AE329538E020069E38F /* DetalPlaceView */,
-				BDA31AE62953972B0069E38F /* GeopositionView */,
-				88C706602E525831005D21E5 /* TipsView */,
 				8884970B2E5511A80019FBC7 /* CategoryView */,
-				8884970D2E5515AD0019FBC7 /* locationrequestView */,
+				BDA31AE62953972B0069E38F /* GeopositionView */,
 				8884970E2E5515C60019FBC7 /* LocationmapView */,
+				BDA31AE329538E020069E38F /* DetalPlaceView */,
+				887080AD2E566C5700C2DB74 /* ZoomPhotoView */,
+				888A38842E5C8BBB00BD5F27 /* CarouselView */,
+				88C706602E525831005D21E5 /* TipsView */,
+				8884970D2E5515AD0019FBC7 /* locationrequestView */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -336,7 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				BDCA3E8129085575006420E4 /* MoyaLayer */,
-				884ABFA62E60DB1E00177A6C /* OpenWewaterModels */,
+				884ABFA62E60DB1E00177A6C /* OpenWeatherDataModels */,
 				BDCA3E8029085555006420E4 /* FSKDataModels */,
 			);
 			path = Network;
@@ -496,11 +496,11 @@
 				BDCA3E6F290844DC006420E4 /* FoursquareAppSwiftUIApp.swift in Sources */,
 				BDA31AE529538E2E0069E38F /* DetailGridCell.swift in Sources */,
 				8853A5952E5A63A300B5AECF /* StringExtensions.swift in Sources */,
-				BD6940A6294E0144000AE3BB /* MainView.swift in Sources */,
+				BD6940A6294E0144000AE3BB /* DiscoveryView.swift in Sources */,
 				BDCA3E93290865B0006420E4 /* PlaceModels.swift in Sources */,
 				BDCA3E86290855F3006420E4 /* FoursquareService.swift in Sources */,
 				BDA31AE829547F6C0069E38F /* UsersTipsView.swift in Sources */,
-				88EC68682E65C7A90094D0F9 /* ShowCitySearchResultView.swift in Sources */,
+				88EC68682E65C7A90094D0F9 /* CitySearchResultView.swift in Sources */,
 				888A38862E5C8BE100BD5F27 /* FullScreenPhotoCarouselView.swift in Sources */,
 				BDEDA70B2961EA3700D14592 /* LocationMapView.swift in Sources */,
 				BDCA3E91290865B0006420E4 /* ContextModels.swift in Sources */,

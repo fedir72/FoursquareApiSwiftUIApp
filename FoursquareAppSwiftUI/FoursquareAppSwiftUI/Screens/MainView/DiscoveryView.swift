@@ -7,27 +7,28 @@
 
 import SwiftUI
 
-struct MainView: View {
-    
-    @EnvironmentObject var locationManager: LocationManager
+
+struct DiscoveryView: View {
+  
     @State var searchCategoryIndex: Int = 19000
     @State var showCategoryView: Bool = false
-    
+
+    let realmCity: RealmCity
+  
     var body: some View {
 
             ZStack {
                 CategoryView(searchCategoryIndex: $searchCategoryIndex,
                              showCategoryView: $showCategoryView)
                 GeoPositionView(showCategories: $showCategoryView,
-                             searchCategoryIndex: $searchCategoryIndex)
+                                searchCategoryIndex: $searchCategoryIndex,
+                                realmCity: realmCity)
                 .offset(x: self.showCategoryView ? 250 : 0, y: 0)
                 .animation(.default,value: self.showCategoryView)
             }
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}
+//#Preview {
+//  DiscoveryView()
+//}

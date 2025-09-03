@@ -8,7 +8,7 @@
 import SwiftUI
 import RealmSwift
 
-struct ShowCitySearchResultView: View {
+struct CitySearchResultView: View {
   //MARK: - propertys
   @Environment(\.dismiss) var dismiss
   @EnvironmentObject var dataSource: PlacesDataSource
@@ -50,5 +50,5 @@ struct ShowCitySearchResultView: View {
 }
 
 #Preview {
-  ShowCitySearchResultView(searchCityTerm: "Tokyo")
+  CitySearchResultView(searchCityTerm: "Tokyo")
 }

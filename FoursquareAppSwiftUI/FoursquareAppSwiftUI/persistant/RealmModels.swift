@@ -8,7 +8,8 @@
 import SwiftUI
 import RealmSwift
 
-class RealmCity: Object, ObjectKeyIdentifiable,
+class RealmCity: Object,
+                 ObjectKeyIdentifiable,
                  CityRepresentable {
   var state: String?
   

@@ -13,6 +13,7 @@ struct StartListView: View {
   //MARK: - properties
   @EnvironmentObject var dataSource: PlacesDataSource
   @ObservedResults(RealmCity.self) var cities
+  
   @State private var searchText = ""
   @State private var showSearchBar = false
   @State private var showSearchResult = false
@@ -62,7 +63,7 @@ struct StartListView: View {
           List {
             ForEach(cities) { city in
               NavigationLink {
-                apologizeView()
+                DiscoveryView(realmCity: city)
               } label: {
                 CityRow(city: city)
               }
@@ -80,9 +81,8 @@ struct StartListView: View {
         Spacer()
       }
       .sheet(isPresented: $showSearchResult) {
-        ShowCitySearchResultView(searchCityTerm: searchText)
+        CitySearchResultView(searchCityTerm: searchText)
       }
-      
       
       //MARK: - navigations
       .navigationTitle("Explore landmarks around the world")
@@ -102,34 +102,6 @@ struct StartListView: View {
     }
     
   }
-  
-  // MARK: - Удаление объекта Realm
-  private func deleteCity(_ city: RealmCity) {
-    do {
-      let realm = try Realm() // новый, живой инстанс
-      if !city.isInvalidated {
-        try realm.write {
-          realm.delete(city)
-        }
-      }
-    } catch {
-      print("Ошибка при удалении: \(error)")
-    }
-  }
-  
-  private func deleteCitySafely(_ city: RealmCity) {
-    // Проверяем валидность и что Realm не frozen
-    guard let realm = city.realm, !city.isInvalidated, !realm.isFrozen else { return }
-    do {
-      try realm.write {
-        realm.delete(city)
-      }
-    } catch {
-      print("Ошибка при удалении объекта Realm: \(error)")
-    }
-  }
-  
-  
   
   // MARK: - Загрузка городов (пример)
   private func loadCities(term: String, limit: Int) {

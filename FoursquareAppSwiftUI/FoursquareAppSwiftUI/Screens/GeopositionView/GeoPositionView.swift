@@ -10,7 +10,7 @@ import MapKit
 
 struct GeoPositionView: View {
   
-    @EnvironmentObject var locationManager: LocationManager
+   // @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var dataSource: PlacesDataSource
     
     @State private var showMap = false
@@ -20,6 +20,8 @@ struct GeoPositionView: View {
     
     @Binding var showCategories: Bool
     @Binding var searchCategoryIndex: Int
+  
+    let realmCity: RealmCity
     
   var body: some View {
     NavigationView {
@@ -43,9 +45,9 @@ struct GeoPositionView: View {
         }
         .listStyle(GroupedListStyle())
         .task { loadNearbyPlaces() }
-        .onChange(of: locationManager.userLocation) { _ in
-          loadNearbyPlaces()
-        }
+//        .onChange(of: locationManager.userLocation) { _ in
+//          loadNearbyPlaces()
+//        }
         .onChange(of: searchTerm) { _ in
           getPlaces(term: searchTerm)
         }
@@ -54,9 +56,9 @@ struct GeoPositionView: View {
         }
         .sheet(isPresented: $showMap) {
           LocationMapView(
-            showMap: $showMap,
-            region: locationManager.region,
-            annotationitems: dataSource.nearbyPlaces
+            latitude: realmCity.lat,        // передаём координату центра
+            longitude: realmCity.lon,      // передаём координату центра
+              annotationitems: dataSource.nearbyPlaces // аннотации для карты
           )
         }
       }
@@ -100,20 +102,20 @@ struct GeoPositionView: View {
     
     // MARK: - Helper Methods
     private func loadNearbyPlaces() {
-        guard let location = locationManager.userLocation else { return }
+ //       guard let location = locationManager.userLocation else { return }
         dataSource.loadNearbyPlaces(
-            lat: location.coordinate.latitude,
-            long: location.coordinate.longitude
+          lat: realmCity.lat,
+          long: realmCity.lon
         )
     }
     
     private func getPlaces(term: String? = nil, category: String? = nil) {
-        guard let location = locationManager.userLocation else { return }
+     //   guard let location = locationManager.userLocation else { return }
         dataSource.getPlaces(
             term: term,
             category: category,
-            lat: location.coordinate.latitude,
-            long: location.coordinate.longitude
+            lat: realmCity.lat,
+            long: realmCity.lon
         )
     }
 }
