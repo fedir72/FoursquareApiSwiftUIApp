@@ -32,10 +32,7 @@ struct ZoomPhotoView: View {
                 Rectangle()
                     .background(.ultraThinMaterial)
                     .ignoresSafeArea()
-                
                 VStack {
-                   // infoHeaderView(photoItem.dateStr())
-                   //   .padding(20)
                     if let w = photoItem.width,
                        let h = photoItem.height,
                        let url = photoItem.photoUrlStr(w: w, h: h) {
@@ -48,9 +45,14 @@ struct ZoomPhotoView: View {
             }
         }
     }
+
+  
+}
+
+private extension ZoomPhotoView {
   
   //MARK: - apologizeView
-   private func apologizeView() -> some View {
+   func apologizeView() -> some View {
      VStack(spacing: 0) {
          Image(systemName: "wrongwaysign")
            .font(.largeTitle).bold()
@@ -62,7 +64,7 @@ struct ZoomPhotoView: View {
    }
   
   //MARK: - infoHeaderView
-  private func infoHeaderView(_ dateText: String) -> some View {
+  func infoHeaderView(_ dateText: String) -> some View {
         HStack {
             Text("Added: \(dateText)")
                 .font(.headline)
@@ -78,7 +80,7 @@ struct ZoomPhotoView: View {
     }
   
     //MARK: - photoView
-    private func photoView(with url: URL, containerSize: CGSize) -> some View {
+    func photoView(with url: URL, containerSize: CGSize) -> some View {
         WebImage(url: url)
             .resizable()
             .scaledToFit()
@@ -158,7 +160,7 @@ struct ZoomPhotoView: View {
   /// - Returns: скорректированное смещение, которое не позволяет картинке уходить за края
  
   //MARK: - clampedOffset
-  private func clampedOffset(containerSize: CGSize, imageSize: CGSize, proposedOffset: CGSize) -> CGSize {
+  func clampedOffset(containerSize: CGSize, imageSize: CGSize, proposedOffset: CGSize) -> CGSize {
       
       // Рассчитываем размер картинки после масштабирования
         let scaledWidth = imageSize.width * scale
@@ -177,5 +179,6 @@ struct ZoomPhotoView: View {
         // Возвращаем скорректированное смещение
         return CGSize(width: clampedX, height: clampedY)
     }
+  
   
 }

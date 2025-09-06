@@ -13,7 +13,7 @@ struct CategoryPlaceImage: View {
     var body: some View {
         VStack{
             if let url = url {
-                AnimatedImage(url: url)
+                WebImage(url: url)
                     .resizable()
                     .frame(width: 50, height: 50)
             } else {

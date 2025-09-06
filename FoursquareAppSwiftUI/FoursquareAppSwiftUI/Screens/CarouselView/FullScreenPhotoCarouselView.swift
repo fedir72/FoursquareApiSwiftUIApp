@@ -12,12 +12,8 @@ struct FullScreenPhotoCarouselView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var dataSource: PlacesDataSource
   
-    @State private var selectedIndex: Int
+    @Binding var selectedIndex: Int
     @State private var dragOffset: CGFloat = 0
-    
-    init(selectedIndex: Int) {
-        self._selectedIndex = .init(wrappedValue: selectedIndex)
-    }
     
     //MARK: - body
     var body: some View {

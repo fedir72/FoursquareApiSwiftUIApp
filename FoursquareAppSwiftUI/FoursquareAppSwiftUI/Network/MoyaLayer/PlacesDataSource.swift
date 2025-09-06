@@ -15,8 +15,11 @@ final class PlacesDataSource: ObservableObject {
     @Published var placePhotos: [PhotoItem] = []    // getPlacePhotos
     @Published var placeTips: [Tip] = []           // getPlaceTips
     @Published var cities: [OpenMapCity] = []
-    
+  
+    @Published var lastLoadedCity: String? = nil
+  
     private let networkProvider: NetworkProvider
+  
     
     init(networkProvider: NetworkProvider) {
         self.networkProvider = networkProvider
@@ -40,19 +43,43 @@ final class PlacesDataSource: ObservableObject {
       }
   }
   
-    func loadNearbyPlaces(lat: Double, long: Double) {
-        networkProvider.getPlacesNearbyMe(lat: lat,
-                                          long: long) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let places):
-                    self?.nearbyPlaces = places
-                case .failure(let error):
-                    print("Ошибка загрузки nearbyPlaces: \(error.localizedDescription)")
-                }
-            }
-        }
-    }
+//    func loadNearbyPlaces(lat: Double, long: Double) {
+//        networkProvider.getPlacesNearbyMe(lat: lat,
+//                                          long: long) { [weak self] result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let places):
+//                    self?.nearbyPlaces = places
+//                case .failure(let error):
+//                    print("Ошибка загрузки nearbyPlaces: \(error.localizedDescription)")
+//                }
+//            }
+//        }
+//    }
+  
+  func loadNearbyPlaces(for cityName: String, lat: Double, long: Double) {
+      // проверяем, не загружали ли мы уже этот город
+      if lastLoadedCity == cityName {
+          print("Места уже загружены для города: \(cityName), пропускаем")
+          return
+      }
+      
+      lastLoadedCity = cityName //! обновляем флаг
+      
+      networkProvider.getPlacesNearbyMe(lat: lat,
+                                        long: long) { [weak self] result in
+          DispatchQueue.main.async {
+              switch result {
+              case .success(let places):
+                  self?.nearbyPlaces = places
+              case .failure(let error):
+                  print("Ошибка загрузки nearbyPlaces: \(error.localizedDescription)")
+              }
+          }
+      }
+  }
+  
+  
     
     func loadPlaceDetails(id: String) {
         networkProvider.getPlaceDetails(id: id) { [weak self] result in

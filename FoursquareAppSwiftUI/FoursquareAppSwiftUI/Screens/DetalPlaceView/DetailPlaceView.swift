@@ -16,12 +16,38 @@ struct DetailPlaceView: View {
   @EnvironmentObject var dataSource: PlacesDataSource
   
   @State var place: Place
-  @State  private var selectedPhotoIndex = 0 {
-    didSet { print( "index", selectedPhotoIndex ) }
-  }
+  
+  @State  private var selectedPhotoIndex: Int = 0
   @State private var showCarouselView = false
   @State private var showTips = false
+  
   @AppStorage("countColumns") private var columns: Int = 3
+  
+  //MARK: - body
+  var body: some View {
+    GeometryReader { geo in
+      photoGrid(geo: geo)
+        .task {
+          dataSource.loadPlacePhotos(id: place.id)
+          dataSource.loadPlaceTips(id: place.id)
+        }
+    }
+    .sheet(isPresented: $showCarouselView) {
+      FullScreenPhotoCarouselView(selectedIndex: $selectedPhotoIndex)
+    }
+    .sheet(isPresented: $showTips) {
+      UsersTipsView(tips: dataSource.placeTips)
+    }
+    .navigationTitle(place.name)
+    .toolbar {
+      toolbarContent()
+    }
+  }
+  
+  
+}
+
+private extension DetailPlaceView {
   
   //MARK: - padding and distance between cells calculation function
   func columns(size: CGSize,
@@ -33,60 +59,43 @@ struct DetailPlaceView: View {
     let itemWidth = (size.width - totalSpacing) / CGFloat(countColumn)
     return Array(repeating: GridItem(.fixed(itemWidth),
                                      spacing: spacing),
-                 count: countColumn )
+                                    count: countColumn )
   }
   
-  //MARK: - body
-  var body: some View {
-    GeometryReader { geo in
-      ScrollView(.vertical,showsIndicators: false) {
-        LazyVGrid( columns:columns(size: geo.size,
-                                   countColumn: columns),
-                   spacing: 3 ) {
-          ForEach(dataSource.placePhotos) { photoItem in
-            
-            Button {
-              if let ind = dataSource.placePhotos.firstIndex(of: photoItem) {
-                selectedPhotoIndex = ind
-                showCarouselView.toggle()
-                
-              }
-            } label: {
-              DetailGridCell(photoItem: photoItem)
-            }
+  //MARK: - ui functionality
+  func photoGrid(geo: GeometryProxy) -> some View {
+    ScrollView(.vertical, showsIndicators: false) {
+      LazyVGrid(columns: columns(size: geo.size, countColumn: columns),
+                spacing: 3) {
+        ForEach(Array(dataSource.placePhotos.enumerated()), id: \.offset) { index, photoItem in
+          Button {
+            selectedPhotoIndex = index
+            showCarouselView = true
+          } label: {
+            DetailGridCell(photoItem: photoItem)
           }
+          .buttonStyle(.plain)
         }
       }
-      .task {
-        dataSource.loadPlacePhotos(id: place.id)
-        dataSource.loadPlaceTips(id: place.id)
-      }
     }
-    .sheet(isPresented: $showCarouselView ) {
-      FullScreenPhotoCarouselView(selectedIndex: selectedPhotoIndex)
-    }
-    .sheet(isPresented: $showTips) {
-      UsersTipsView(tips: dataSource.placeTips)
-    }
-    .navigationTitle(place.name)
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button {
-          showTips.toggle()
-        } label: {
-          Text("Tips(\(dataSource.placeTips.count))") .bold()
-        }
+  }
+  
+  @ToolbarContentBuilder
+  func toolbarContent() -> some ToolbarContent {
+    ToolbarItemGroup(placement: .navigationBarTrailing) {
+      Button {
+        showTips.toggle()
+      } label: {
+        Text("Tips(\(dataSource.placeTips.count))").bold()
       }
       
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Menu {
-          Text("Cell size")
-          Button { columns = 3 } label: { Text("Small x3") }
-          Button { columns = 2 } label: { Text("Medium x2") }
-          Button { columns = 1 } label: { Text("Large x1") }
-        } label: {
-          Image(systemName: "eyeglasses")
-        }
+      Menu {
+        Text("Cell size")
+        Button { columns = 3 } label: { Text("Small x3") }
+        Button { columns = 2 } label: { Text("Medium x2") }
+        Button { columns = 1 } label: { Text("Large x1") }
+      } label: {
+        Image(systemName: "eyeglasses")
       }
     }
   }

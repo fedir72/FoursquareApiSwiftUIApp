@@ -33,7 +33,10 @@ class LocationManager: NSObject, ObservableObject {
   }
     @Published var region = MKCoordinateRegion(center: MapDetails.startLocation,
                                                span: MapDetails.defaultSpan)
-    
+  
+      // 🔹 новый Published для адреса центра карты
+     @Published var centerAddress: String = "somewhere"
+  
    override init() {
         super.init()
         manager.delegate = self
@@ -53,6 +56,26 @@ class LocationManager: NSObject, ObservableObject {
           break
       }
   }
+  
+  // 🔹 функция обратного геокодирования
+  func updateAddress(for coordinate: CLLocationCoordinate2D) {
+      let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+      CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+          if let placemark = placemarks?.first {
+              var address = ""
+              if let name = placemark.name { address += name }
+              if let locality = placemark.locality { address += ", \(locality)" }
+              if let country = placemark.country { address += ", \(country)" }
+              
+              DispatchQueue.main.async {
+                  self.centerAddress = address
+              }
+          } else if let error = error {
+              print("Ошибка геокодирования: \(error.localizedDescription)")
+          }
+      }
+  }
+  
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -76,47 +99,3 @@ extension LocationManager: CLLocationManagerDelegate {
         print("Failed to get user location: \(error.localizedDescription)")
     }
 }
-
-//extension LocationManager {
-//    func searchCities(query: String, completion: @escaping ([City]) -> Void) {
-//        let request = MKLocalSearch.Request()
-//        request.naturalLanguageQuery = query
-//        request.resultTypes = .address  // ищем именно адреса/города
-//
-//        let search = MKLocalSearch(request: request)
-//        search.start { response, error in
-//            if let error = error {
-//                print("Ошибка поиска: \(error.localizedDescription)")
-//                completion([])
-//                return
-//            }
-//            
-//            guard let response = response else {
-//                completion([])
-//                return
-//            }
-//            
-//            let cities: [City] = response.mapItems.compactMap { item in
-//                guard let name = item.name else { return nil }
-//                let country = item.placemark.country
-//                let coordinate = item.placemark.coordinate
-//                let timeZone = item.timeZone
-//                
-//                return City(name: name,
-//                            country: country,
-//                            coordinate: coordinate,
-//                            timeZone: timeZone)
-//            }
-//            
-//            completion(cities)
-//        }
-//    }
-//}
-
-//locationManager.searchCities(query: "Tokyo") { results in
-//    for city in results {
-//        print(city.name ?? "Без названия",
-//              city.placemark.coordinate.latitude,
-//              city.placemark.coordinate.longitude)
-//    }
-//}
