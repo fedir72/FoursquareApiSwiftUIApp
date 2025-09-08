@@ -88,12 +88,51 @@ extension LocationManager: CLLocationManagerDelegate {
             self.region = MKCoordinateRegion(center: location.coordinate,
                                              span: MapDetails.defaultSpan)
         }
-        manager.stopUpdatingLocation() // если нужен только один апдейт
+        manager.stopUpdatingLocation()
     }
+  
+  /// Получает текущий город по геопозиции и возвращает RealmCity
+  func getCurrentCity(completion: @escaping (RealmCity?) -> Void) {
+      guard let location = userLocation else {
+          completion(nil)
+          return
+      }
+
+      CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+          guard error == nil,
+                let placemark = placemarks?.first,
+                let cityName = placemark.locality,
+                let country = placemark.country else {
+              completion(nil)
+              return
+          }
+
+          let city = RealmCity()
+          city._id = UUID().uuidString
+          city.name = cityName
+          city.lat = location.coordinate.latitude
+          city.lon = location.coordinate.longitude
+          city.country = country
+          city.state = placemark.administrativeArea
+
+          DispatchQueue.main.async {
+              completion(city)
+          }
+      }
+  }
+  
+  
+  
+  
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get user location: \(error.localizedDescription)")
     }
+  
+  
+  
+  
+  
 }
 
 

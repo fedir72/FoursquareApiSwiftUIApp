@@ -123,12 +123,14 @@ final class PlacesDataSource: ObservableObject {
   
   func loadCities(by term: String, limit: Int) {
     networkProvider.getCities(term: term, limit: limit) {[weak self] result in
-      switch result {
-        
-      case .success(let cityes):
-        self?.cities = cityes
-      case .failure(let error):
-        print("Ошибка загрузки Cityes: \(error.localizedDescription)")
+      DispatchQueue.main.async {
+        switch result {
+        case .success(let cityes):
+          print("sucsess",cityes.count)
+          self?.cities = cityes
+        case .failure(let error):
+          print("Ошибка загрузки Cityes: \(error.localizedDescription)")
+        }
       }
     }
   }

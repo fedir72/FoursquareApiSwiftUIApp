@@ -16,17 +16,20 @@ struct CitySearchResultView: View {
   let searchCityTerm: String
   
   var body: some View {
-    VStack {
+   Form {
       if dataSource.cities.isEmpty {
-        Text("data not found")
-      }
+        Text("Cities not found")
+          .font(.largeTitle)
+          .foregroundStyle(.red)
+      } else {
         List(dataSource.cities) { city in
           Button {
-           saveCityToRealm(RealmCity(from: city))
+            saveCityToRealm(RealmCity(from: city))
             dismiss()
           } label: {
             CityRow(city: city)
           }
+        }
       }
     }
     .task {
@@ -43,12 +46,12 @@ struct CitySearchResultView: View {
             }
         }
     } catch {
-        print("Ошибка при удалении: \(error)")
+        print("error adding new item: \(error)")
     }
   }
   
 }
 
 #Preview {
-  CitySearchResultView(searchCityTerm: "Tokyo")
+  CitySearchResultView(searchCityTerm: "Tkyo")
 }
