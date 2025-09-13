@@ -208,12 +208,12 @@
 			path = CategoryView;
 			sourceTree = "<group>";
 		};
-		8884970C2E5515910019FBC7 /* MainView */ = {
+		8884970C2E5515910019FBC7 /* DiscoveryView */ = {
 			isa = PBXGroup;
 			children = (
 				BD6940A5294E0144000AE3BB /* DiscoveryView.swift */,
 			);
-			path = MainView;
+			path = DiscoveryView;
 			sourceTree = "<group>";
 		};
 		8884970D2E5515AD0019FBC7 /* locationrequestView */ = {
@@ -343,7 +343,7 @@
 				88EC68662E65C76F0094D0F9 /* ShowCitySearchResultView */,
 				886AAC642E5741FF00EDBFBF /* LoadingView */,
 				8884970B2E5511A80019FBC7 /* CategoryView */,
-				8884970C2E5515910019FBC7 /* MainView */,
+				8884970C2E5515910019FBC7 /* DiscoveryView */,
 				BDA31AE62953972B0069E38F /* GeopositionView */,
 				8884970E2E5515C60019FBC7 /* LocationmapView */,
 				BDA31AE329538E020069E38F /* DetalPlaceView */,

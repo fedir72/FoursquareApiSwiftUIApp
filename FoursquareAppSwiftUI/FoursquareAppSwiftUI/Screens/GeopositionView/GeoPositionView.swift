@@ -22,6 +22,7 @@ struct GeoPositionView: View {
   @Binding var searchCategoryIndex: Int
   
   let realmCity: RealmCity
+  let isUserPosition: Bool
   
   var body: some View {
     
@@ -47,7 +48,8 @@ struct GeoPositionView: View {
           .sheet(isPresented: $showMap) {
             LocationMapView(
               realmCity: realmCity,
-              annotationitems: dataSource.nearbyPlaces
+              annotationitems: dataSource.nearbyPlaces,
+              isUserPosition: isUserPosition
             )
           }
       }

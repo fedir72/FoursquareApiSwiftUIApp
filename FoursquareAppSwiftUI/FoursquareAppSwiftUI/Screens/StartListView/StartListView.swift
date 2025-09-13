@@ -57,7 +57,7 @@ struct StartListView: View {
       }
       //MARK: - show DiscoveryView
       .navigationDestination(for: RealmCity.self) { city in
-        DiscoveryView(realmCity: city)
+        DiscoveryView(realmCity: city, isUserPosition: true)
       }
       // MARK: - Sheet CitySearchResultView
       .sheet(isPresented: $showSearchSheet) {

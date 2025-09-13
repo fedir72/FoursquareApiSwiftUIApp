@@ -14,6 +14,7 @@ struct DiscoveryView: View {
   @State var showCategoryView: Bool = false
   
   let realmCity: RealmCity
+  let isUserPosition: Bool
   
   var body: some View {
     
@@ -22,7 +23,7 @@ struct DiscoveryView: View {
                    showCategoryView: $showCategoryView)
       GeoPositionView(showCategories: $showCategoryView,
                       searchCategoryIndex: $searchCategoryIndex,
-                      realmCity: realmCity)
+                      realmCity: realmCity, isUserPosition: isUserPosition)
       .offset(x: self.showCategoryView ? 250 : 0, y: 0)
       .animation(.default,value: self.showCategoryView)
     }

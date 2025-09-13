@@ -31,7 +31,7 @@ struct CityListView: View {
       } else {
         ForEach(cities) { city in
           NavigationLink {
-            DiscoveryView(realmCity: city)
+            DiscoveryView(realmCity: city, isUserPosition: false)
           } label: {
             CityRow(city: city)
           }
