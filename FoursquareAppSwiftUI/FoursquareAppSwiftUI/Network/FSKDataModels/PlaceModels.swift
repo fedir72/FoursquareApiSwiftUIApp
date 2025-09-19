@@ -3,7 +3,10 @@
 import Foundation
 import MapKit
 
-struct Place: Decodable, Identifiable {
+struct Place: Decodable,
+              Identifiable {
+  
+  
   let id: String
   let categories: [Category]
   let geocodes: Main

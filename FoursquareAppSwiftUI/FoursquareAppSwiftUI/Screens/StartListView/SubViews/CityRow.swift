@@ -6,18 +6,22 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct CityRow: View {
-  let city: CityRepresentable
+  let city: RealmCity
   
   var body: some View {
     VStack(alignment: .leading, spacing: 4) {
-      Text(city.name)
-        .font(.headline)
-        .foregroundStyle(.blue)
+
       Text(city.fullAddress)
-        .font(.subheadline)
-        .foregroundColor(.gray)
+        .font(.headline)
+        .foregroundColor(.blue)
+      if city.places.isEmpty == false {
+        Text("favorites: \(city.places.count)")
+                .font(.subheadline)
+                .foregroundStyle(.red)
+      }
       Text(city.coordinateText)
         .font(.subheadline)
         .foregroundColor(.gray)

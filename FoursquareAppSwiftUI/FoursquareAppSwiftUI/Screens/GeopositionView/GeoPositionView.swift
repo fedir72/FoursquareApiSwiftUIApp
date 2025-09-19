@@ -10,7 +10,6 @@ import MapKit
 
 struct GeoPositionView: View {
   
-  // @EnvironmentObject var locationManager: LocationManager
   @EnvironmentObject var dataSource: PlacesDataSource
   
   @State private var showMap = false
@@ -24,34 +23,49 @@ struct GeoPositionView: View {
   let realmCity: RealmCity
   let isUserPosition: Bool
   
+  @State private var showFavorites = false
+  
   var body: some View {
     
     NavigationView {
-      VStack {
-        infoView()
-        nearbyPlacesList(places: dataSource.nearbyPlaces)
-          .listStyle(GroupedListStyle())
-          .task {
-            print("task")
-            dataSource.loadNearbyPlaces(
-              for: realmCity.name,
-              lat: realmCity.lat,
-              long: realmCity.lon
-            )
-          }
-          .onChange(of: searchTerm) { _ in
-            getPlaces(term: searchTerm)
-          }
-          .onChange(of: searchCategoryIndex) { _ in
-            getPlaces(category: String(searchCategoryIndex))
-          }
-          .sheet(isPresented: $showMap) {
-            LocationMapView(
-              realmCity: realmCity,
-              annotationitems: dataSource.nearbyPlaces,
-              isUserPosition: isUserPosition
-            )
-          }
+      VStack{
+        infoView()//MARK: - debug
+        Toggle(isOn: $showFavorites) {
+            Text("Show Favorites (\(realmCity.places.count))")
+                .foregroundColor(.blue) // цвет текста
+                .font(.headline)
+        }
+        .padding(.horizontal,15)
+        .tint(.green)
+        ZStack {
+          NearbyPlacesList(places: dataSource.nearbyPlaces, cityName: realmCity.name)
+            .offset(x: showFavorites ? -UIScreen.main.bounds.width : 0)
+            .animation(.easeInOut, value: showFavorites)
+          RealmCityPlacesList(city: realmCity)
+            .offset(x: showFavorites ? 0 : UIScreen.main.bounds.width)
+            .animation(.easeInOut, value: showFavorites)
+        }
+        .task { print("userposition",isUserPosition)}
+        .task {
+          dataSource.loadNearbyPlaces(
+            for: realmCity.name,
+            lat: realmCity.lat,
+            long: realmCity.lon
+          )
+        }
+        .onChange(of: searchTerm) { _ in
+          getPlaces(term: searchTerm)
+        }
+        .onChange(of: searchCategoryIndex) { _ in
+          getPlaces(category: String(searchCategoryIndex))
+        }
+        .sheet(isPresented: $showMap) {
+          LocationMapView(
+            realmCity: realmCity,
+            annotationitems: dataSource.nearbyPlaces,
+            isUserPosition: isUserPosition
+          )
+        }
       }
       .navigationTitle(realmCity.name)
       .toolbar {
@@ -70,80 +84,69 @@ struct GeoPositionView: View {
     .disabled(showCategories ? true : false)
   }
   
-  // MARK: - Helper Methods
-  private func loadNearbyPlaces() {
-    dataSource.loadNearbyPlaces(
-      for: realmCity.name,
-      lat: realmCity.lat,
-      long: realmCity.lon
-    )
-  }
-  
-  private func getPlaces(term: String? = nil, category: String? = nil) {
-    dataSource.getPlaces(
-      term: term,
-      category: category,
-      lat: realmCity.lat,
-      long: realmCity.lon
-    )
-  }
-  
-  private func infoView() -> some View {
-    VStack(alignment: .leading) {
-      Text("places: \(dataSource.nearbyPlaces.count)")
-      Text("index: \(searchCategoryIndex)")
-      Text("term: \(searchTerm)")
-    }
-  }
-  
-  private func nearbyPlacesList(places: [Place]) -> some View {
-    List {
-      if places.isEmpty {
-        LoadingView()
-      }
-      
-      ForEach(places, id: \.name) { place in
-        NavigationLink(destination: DetailPlaceView(place: place)) {
-          SearchRow(place: place)
-            .frame( height: 40)
-        }
-      }
-    }
-  }
-  
-  @ToolbarContentBuilder
-  private func topBarContent() -> some ToolbarContent {
-    ToolbarItem(placement: .navigationBarLeading) {
-      Button {
-        showCategories.toggle()
-      } label: {
-        Image(systemName: "list.bullet")
-          .font(.title3)
-      }
-    }
-    
-    ToolbarItemGroup(placement: .navigationBarTrailing) {
-      Button {
-        showMap.toggle()
-      } label: {
-        Image(systemName: "globe")
-          .font(.title3)
-      }
-      
-      Button {
-        tempSearchTerm = searchTerm
-        showSearchAlert = true
-      } label: {
-        Image(systemName: "magnifyingglass")
-          .font(.title3)
-      }
-    }
-  }
-  
 }
 
-
-
+// MARK: - Private Methods
+private extension GeoPositionView {
+    func loadNearbyPlaces() {
+        dataSource.loadNearbyPlaces(for: realmCity.name,
+                                    lat: realmCity.lat,
+                                    long: realmCity.lon)
+    }
+    
+    func getPlaces(term: String? = nil, category: String? = nil) {
+        dataSource.getPlaces(term: term,
+                             category: category,
+                             lat: realmCity.lat,
+                             long: realmCity.lon)
+    }
+    
+    func infoView() -> some View {
+        VStack(alignment: .leading) {
+            Text("places: \(dataSource.nearbyPlaces.count), favorites( \(realmCity.places.count) )")
+            Text("index: \(searchCategoryIndex)")
+          Text("Coord: \(realmCity.lat) \(realmCity.lon)")
+        }
+    }
+    
+    func segmentPicker(selectedSegment: Binding<Int>, favoritesCount: Int) -> some View {
+        Picker("", selection: selectedSegment) {
+            Text("Search Results").tag(0)
+            Text("Favorites(\(favoritesCount))").tag(1)
+        }
+        .pickerStyle(SegmentedPickerStyle())
+        .padding(.horizontal)
+    }
+    
+    @ToolbarContentBuilder
+    func topBarContent() -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+                showCategories.toggle()
+            } label: {
+                Image(systemName: "list.bullet")
+                    .font(.title3)
+            }
+        }
+        
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            Button {
+                showMap.toggle()
+            } label: {
+                Image(systemName: "globe")
+                    .font(.title3)
+            }
+            
+            Button {
+                tempSearchTerm = searchTerm
+                showSearchAlert = true
+            } label: {
+                Image(systemName: "magnifyingglass")
+                    .font(.title3)
+            }
+        }
+    }
+}
 
 
 

@@ -12,6 +12,7 @@ struct CitySearchResultView: View {
   //MARK: - propertys
   @Environment(\.dismiss) var dismiss
   @EnvironmentObject var dataSource: PlacesDataSource
+  @Environment(\.realm) var realm
   
   let searchCityTerm: String
   
@@ -27,7 +28,7 @@ struct CitySearchResultView: View {
             saveCityToRealm(RealmCity(from: city))
             dismiss()
           } label: {
-            CityRow(city: city)
+            openMapCityRow(city)
           }
         }
       }
@@ -39,16 +40,29 @@ struct CitySearchResultView: View {
   
   private func saveCityToRealm(_ city: RealmCity ) {
     do {
-        let realm = try Realm()
-        if !city.isInvalidated {
             try realm.write {
               realm.add(city)
             }
-        }
     } catch {
         print("error adding new item: \(error)")
     }
   }
+  
+  private func openMapCityRow(_ city: OpenMapCity) -> some View {
+    
+      VStack(alignment: .leading, spacing: 4) {
+        Text(city.name)
+          .font(.headline)
+          .foregroundStyle(.blue)
+        Text(city.fullAddress)
+          .font(.subheadline)
+          .foregroundColor(.gray)
+        Text(city.coordinateText)
+          .font(.subheadline)
+          .foregroundColor(.gray)
+      }
+      .padding(.vertical, 6)
+    }
   
 }
 

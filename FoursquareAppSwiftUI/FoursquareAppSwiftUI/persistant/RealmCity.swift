@@ -11,6 +11,7 @@ import RealmSwift
 class RealmCity: Object,
                  ObjectKeyIdentifiable,
                  CityRepresentable {
+  
   var state: String?
   
   @Persisted(primaryKey: true) var _id: String
@@ -18,6 +19,8 @@ class RealmCity: Object,
   @Persisted var lat: Double = 0
   @Persisted var lon: Double = 0
   @Persisted var country: String? = nil
+  //MARK: - persisted favorite plces
+  @Persisted var places = List<RealmPlace>()
   
   // Инициализация из OpenMapCity
   convenience init(from city: OpenMapCity) {
@@ -43,3 +46,5 @@ class RealmCity: Object,
   }
   
 }
+
+

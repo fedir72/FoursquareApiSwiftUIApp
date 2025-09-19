@@ -5,16 +5,22 @@
 //  Created by ihor fedii on 23.08.25.
 //
 
+
+
 import SwiftUI
 import RealmSwift
+import CoreLocation
+
 
 struct StartListView: View {
   
   // MARK: - properties
+  @Environment(\.realm) var realm
+  
   @EnvironmentObject var dataSource: PlacesDataSource
   @EnvironmentObject var locationManager: LocationManager
   
-  @ObservedResults(RealmCity.self) var cities
+ // @ObservedResults(RealmCity.self) var cities
   
   @State private var searchText = ""
   @State private var showSearchBar = false
@@ -29,7 +35,7 @@ struct StartListView: View {
   var body: some View {
     NavigationStack(path: $path) {
       ZStack {
-        CityListView(cities: Array(cities))
+        CityListView()
           .padding(.top, showSearchBar ? 70 : 0)
         
         VStack {
@@ -40,6 +46,7 @@ struct StartListView: View {
           Spacer()
         }
       }
+      .ignoresSafeArea(.keyboard, edges: .bottom)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         principalToolbar()
@@ -48,7 +55,7 @@ struct StartListView: View {
       .safeAreaInset(edge: .bottom) {
         exploreButton()
       }
-      .ignoresSafeArea(.keyboard, edges: .bottom)
+     
       //MARK: - use current location
       .onChange(of: locationManager.userLocation) { newLocation in
           if newLocation != nil && isLoadingLocation {
@@ -98,26 +105,47 @@ private extension StartListView {
   
   //MARK: - fetchCurrentCity
   private func fetchCurrentCity() {
-    locationManager.getCurrentCity { city in
-    //  DispatchQueue.main.async {
-        isLoadingLocation = false
-        if let city = city {
-          path.append(city) // 👉 пушим в стек → переход
-        } else {
-          print("Не удалось получить город по геопозиции")
-        }
-   //   }
-    }
+      locationManager.getCurrentCity { city in
+          isLoadingLocation = false
+          guard let city = city else {
+              print("Не удалось получить город по геопозиции")
+              return
+          }
+
+          // Сохраняем координаты в RealmCity
+          let realmCity = RealmCity()
+          realmCity.name = city.name
+          if let userLocation = locationManager.userLocation {
+              realmCity.lat = userLocation.coordinate.latitude
+              realmCity.lon = userLocation.coordinate.longitude
+          }
+
+          // Добавляем город в стек навигации
+          path.append(realmCity)
+      }
+  }
+  
+  func createRealmCityFromUserLocation(_ location: CLLocation) {
+      let realmCity = RealmCity()
+      realmCity.name = "Current City" // Или получаем из geocoder
+      realmCity.lat = location.coordinate.latitude
+      realmCity.lon = location.coordinate.longitude
+      
+      path.append(realmCity)
+      isLoadingLocation = false
   }
   
   // MARK: - exploreButton()
   @ViewBuilder
-  private func exploreButton() -> some View {
+  func exploreButton() -> some View {
       Button {
           isLoadingLocation = true
-          if locationManager.userLocation != nil {
-              fetchCurrentCity()
+          
+          // Если координаты уже есть, сразу используем
+          if let userLocation = locationManager.userLocation {
+              createRealmCityFromUserLocation(userLocation)
           } else {
+              // Запрашиваем разрешение и ждём координаты
               locationManager.requestPermissionAndStart()
           }
       } label: {
@@ -142,6 +170,40 @@ private extension StartListView {
       }
   }
   
+  
+  
+  
+//  @ViewBuilder
+//  private func exploreButton() -> some View {
+//      Button {
+//          isLoadingLocation = true
+//          if locationManager.userLocation != nil {
+//              fetchCurrentCity()
+//          } else {
+//              locationManager.requestPermissionAndStart()
+//          }
+//      } label: {
+//          HStack(spacing: 8) {
+//              if isLoadingLocation {
+//                  ProgressView()
+//                      .progressViewStyle(CircularProgressViewStyle(tint: .white))
+//              } else {
+//                  Image(systemName: "location.circle.fill")
+//                      .foregroundColor(.white)
+//              }
+//              
+//              Text("explore sights around me")
+//                  .foregroundColor(.white)
+//                  .font(.title2)
+//          }
+//          .padding(.vertical, 14)
+//          .padding(.horizontal, 24)
+//          .background(Color.blue)
+//          .clipShape(Capsule())
+//          .frame(minWidth: 200)
+//      }
+//  }
+  
   private func performSearch() {
       let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
       guard !term.isEmpty else { return }
@@ -151,7 +213,7 @@ private extension StartListView {
       searchText = ""
   }
   
-  // MARK: - searchBarView()
+  //MARK: - searchBarView()
  // @ViewBuilder
   private func searchBarView() -> some View {
     HStack {

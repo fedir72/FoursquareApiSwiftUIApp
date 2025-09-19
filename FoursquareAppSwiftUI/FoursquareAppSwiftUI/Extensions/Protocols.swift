@@ -18,3 +18,4 @@ protocol CityRepresentable {
   var coordinateText: String { get }
   
 }
+

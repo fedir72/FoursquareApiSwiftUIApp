@@ -25,8 +25,10 @@ struct FoursquareAppSwiftUIApp: SwiftUI.App {
           StartListView()
             .environmentObject(locationManager)
             .environmentObject(dataSource)
-          
-            
+            .environment(\.realm, try! Realm())
+            .onAppear {
+                print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.path)
+            }
         }
     }
 }
