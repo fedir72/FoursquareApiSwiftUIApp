@@ -26,6 +26,10 @@ struct DetailPlaceView: View {
     
     @EnvironmentObject var dataSource: PlacesDataSource
     @EnvironmentObject var locationManager: LocationManager
+  
+    @Environment(\.realm) var realm
+    @ObservedResults(RealmCity.self) var cities
+    @ObservedResults(RealmPlace.self) var places
     
     // MARK: - Initializers
     init(place: Place, cityName: String) {
@@ -45,16 +49,21 @@ struct DetailPlaceView: View {
     // MARK: - Body
     var body: some View {
         ZStack {
-            GeometryReader { geo in
-                photoGrid(geo: geo)
-                    .task {
-                        dataSource.loadPlacePhotos(id: placeId)
-                        dataSource.loadPlaceTips(id: placeId)
-                        // Check if already saved
-                        checkIfAlreadySaved()
-                    }
+          VStack {
+            if let address = place?.location.formatted_address ??
+                               places.first(where: { $0._id == placeId })?.formattedAddress {
+              addressView(placeName: placeName, address: address)
             }
-            
+            GeometryReader { geo in
+              photoGrid(geo: geo)
+                .task {
+                  dataSource.loadPlacePhotos(id: placeId)
+                  dataSource.loadPlaceTips(id: placeId)
+                  // Check if already saved
+                  checkIfAlreadySaved()
+                }
+            }
+          }
             VStack {
                 Spacer()
                 addToFavoriteButton()
@@ -68,7 +77,8 @@ struct DetailPlaceView: View {
         .sheet(isPresented: $showTips) {
             UsersTipsView(tips: dataSource.placeTips)
         }
-        .navigationTitle(placeName)
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar { toolbarContent() }
         .alert("Cannot Save", isPresented: $showNoLocationAlert) {
             Button("OK", role: .cancel) { }
@@ -81,10 +91,39 @@ struct DetailPlaceView: View {
 
 // MARK: - Private functions
 private extension DetailPlaceView {
+  
+  private func addressView(placeName: String, address: String) -> some View {
+    HStack {
+      VStack(alignment: .leading, spacing: 4) {
+        Text(placeName)
+          .font(.headline)
+          .fontWeight(.bold)
+          .lineLimit(1)
+          .minimumScaleFactor(0.7)
+        Text(address)
+          .font(.subheadline)
+          .foregroundColor(.gray)
+          .fixedSize(horizontal: false, vertical: true)// перенос на несколько строк
+      }
+      .frame(maxWidth: .infinity, alignment: .leading)
+      Image(systemName: "mappin.and.ellipse") // можно заменить на mappin
+        .foregroundColor(.red)
+        .font(.title2)
+        .padding(.trailing, 5)
+    }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .padding(10) // ← внутренние отступы от текста до фона
+    .background(Color.gray.opacity(0.2))
+    .cornerRadius(8)
+    .padding(.horizontal, 3)
+    
+  }
+  
+  
+  
     
     // MARK: - Check if the place is already saved
     func checkIfAlreadySaved() {
-        let realm = try! Realm()
         guard let city = realm.objects(RealmCity.self).first(where: { $0.name == cityName }) else {
             isAlreadySaved = false
             return
@@ -109,57 +148,72 @@ private extension DetailPlaceView {
             .shadow(radius: 5)
         }
     }
-    
-    // MARK: - Toggle function: add or remove from Realm
-  private func toggleFavorite() {
-      let realm = try! Realm()
+  
+  func toggleFavorite() {
+      let city = findOrCreateCity(named: cityName)
+      guard let city else { return }
       
-      try! realm.write {
-          var city = realm.objects(RealmCity.self).first(where: { $0.name == cityName })
-          if city == nil {
-              let newCity = RealmCity()
-              newCity._id = UUID().uuidString
-              newCity.name = cityName
-              realm.add(newCity)
-              city = newCity
-          }
-          guard let city = city else { return }
-          
-          if let existing = city.places.first(where: { $0._id == placeId }) {
-              // Remove from favorites
-              realm.delete(existing)
-              isAlreadySaved = false
-          } else {
-              // Determine coordinates
-              var lat: Double?
-              var lon: Double?
-              
-              if let place = place {
-                  lat = place.geocodes.main?.latitude
-                  lon = place.geocodes.main?.longitude
-              } else if let userLocation = locationManager.userLocation {
-                lat = userLocation.coordinate.latitude
-                lon = userLocation.coordinate.longitude
-              }
-              
-              guard let latitude = lat, let longitude = lon else {
-                  showNoLocationAlert = true
-                  return
-              }
-              
-              // Add to favorites
-              let favoritePlace = RealmPlace()
-              favoritePlace._id = placeId
-              favoritePlace.name = placeName
-              favoritePlace.lat = latitude
-              favoritePlace.lon = longitude
-              
+      if let existingPlace = city.places.first(where: { $0._id == placeId }) {
+          removePlace(existingPlace, from: city)
+      } else if let place = place {
+          addPlace(place, to: city)
+      }
+  }
+
+  // MARK: - add place
+ func addPlace(_ apiPlace: Place, to city: RealmCity) {
+      let favoritePlace = RealmPlace(from: apiPlace)
+      
+      do {
+          try realm.write {
               city.places.append(favoritePlace)
-              isAlreadySaved = true
           }
+          isAlreadySaved = true
+      } catch {
+          print("❌ Error adding place: \(error.localizedDescription)")
+      }
+  }
+
+  // MARK: - remove place
+  func removePlace(_ place: RealmPlace, from city: RealmCity) {
+      do {
+          try realm.write {
+              if let index = city.places.firstIndex(of: place) {
+                  city.places.remove(at: index)
+              }
+              realm.delete(place)
+          }
+          isAlreadySaved = false
+      } catch {
+          print("❌ Error removing place: \(error.localizedDescription)")
       }
   }
   
+ func findOrCreateCity(named name: String) -> RealmCity? {
+      // ищем город
+      if let existingCity = realm.objects(RealmCity.self).filter("name == %@", name).first {
+          return existingCity
+      }
+      
+      // если нет — создаём
+      let newCity = RealmCity()
+      newCity._id = UUID().uuidString
+      newCity.name = name
+      newCity.lat = locationManager.userLocation?.coordinate.latitude ?? 0
+      newCity.lon = locationManager.userLocation?.coordinate.longitude ?? 0
+      
+      do {
+          try realm.write {
+              realm.add(newCity)
+          }
+          return newCity
+      } catch {
+          print("❌ Error creating city: \(error.localizedDescription)")
+          return nil
+      }
+  }
+  
+
     // MARK: - Grid layout helper
     func columns(size: CGSize,
                  countColumn: Int,

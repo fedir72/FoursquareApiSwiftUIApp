@@ -105,7 +105,7 @@ private extension GeoPositionView {
         VStack(alignment: .leading) {
             Text("places: \(dataSource.nearbyPlaces.count), favorites( \(realmCity.places.count) )")
             Text("index: \(searchCategoryIndex)")
-          Text("Coord: \(realmCity.lat) \(realmCity.lon)")
+            Text("Coord: \(realmCity.lat) \(realmCity.lon)")
         }
     }
     

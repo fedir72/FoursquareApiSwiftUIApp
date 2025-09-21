@@ -38,8 +38,6 @@ class LocationManager: NSObject, ObservableObject {
         manager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    /// Новый метод вместо checkAuthorization
-    /// Его нужно вызывать вручную на нужном экране
     func requestPermissionAndStart() {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
@@ -66,7 +64,7 @@ class LocationManager: NSObject, ObservableObject {
                     self.centerAddress = address
                 }
             } else if let error = error {
-                print("Ошибка геокодирования: \(error.localizedDescription)")
+                print("geocoding error: \(error.localizedDescription)")
             }
         }
     }
@@ -97,28 +95,32 @@ extension LocationManager: CLLocationManagerDelegate {
           completion(nil)
           return
       }
-
-      CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-          guard error == nil,
-                let placemark = placemarks?.first,
-                let cityName = placemark.locality,
-                let country = placemark.country else {
-              completion(nil)
-              return
-          }
-
-          let city = RealmCity()
-          city._id = UUID().uuidString
-          city.name = cityName
-          city.lat = location.coordinate.latitude
-          city.lon = location.coordinate.longitude
-          city.country = country
-          city.state = placemark.administrativeArea
-
-          DispatchQueue.main.async {
-              completion(city)
-          }
+    
+    let geocoder = CLGeocoder()
+    //MARK: - names of cities in English
+    let locale = Locale(identifier: "en_US")
+    geocoder.reverseGeocodeLocation(location,
+                                     preferredLocale: locale)  { placemarks, error in
+      guard error == nil,
+            let placemark = placemarks?.first,
+            let cityName = placemark.locality,
+            let country = placemark.country else {
+        completion(nil)
+        return
       }
+      
+      let city = RealmCity()
+      city._id = UUID().uuidString
+      city.name = cityName
+      city.lat = location.coordinate.latitude
+      city.lon = location.coordinate.longitude
+      city.country = country
+      city.state = placemark.administrativeArea
+     // print(city.name,city.country,city.state)
+      DispatchQueue.main.async {
+        completion(city)
+      }
+    }
   }
   
   

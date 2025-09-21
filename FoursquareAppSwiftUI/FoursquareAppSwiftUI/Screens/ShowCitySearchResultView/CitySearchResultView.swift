@@ -67,5 +67,5 @@ struct CitySearchResultView: View {
 }
 
 #Preview {
-  CitySearchResultView(searchCityTerm: "Tkyo")
+  CitySearchResultView(searchCityTerm: "Tokyo")
 }

@@ -24,10 +24,13 @@ struct Place: Decodable,
 }
 
 extension Place {
+  
   enum CodingKeys: String, CodingKey {
     case id = "fsq_id"
     case categories,geocodes,link,location,name,timezone
   }
+  
+  
 }
 
 struct MapAdress: Decodable {
@@ -53,6 +56,10 @@ struct Icon: Decodable {
     case medium = "64"
     case big = "88"
     case large = "120"
+  }
+  
+  func iconUrlStr() -> String? {
+    return self.prefix + String(44) + self.suffix
   }
   
   func iconURl(resolution: IconResolution) -> URL? {

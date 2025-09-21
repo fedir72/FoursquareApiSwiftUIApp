@@ -13,17 +13,13 @@ class RealmPlace: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var _id: String   // fsq_id из API
     @Persisted var name: String = ""
     @Persisted var categoryName: String? = nil
-    
-    // Для сборки URL категории, как в Place.Icon
-    @Persisted var categoryIconPrefix: String? = nil
-    @Persisted var categoryIconSuffix: String? = nil
-    
     @Persisted var lat: Double = 0
     @Persisted var lon: Double = 0
     @Persisted var formattedAddress: String? = nil
     @Persisted var country: String? = nil
     @Persisted var timezone: String? = nil
     @Persisted var link: String? = nil
+    @Persisted var categoryImageUrlStr: String?
     
     // MARK: - Init from API Place
     convenience init(from apiPlace: Place) {
@@ -36,27 +32,17 @@ class RealmPlace: Object, ObjectKeyIdentifiable {
         self.country = apiPlace.location.country
         self.timezone = apiPlace.timezone
         self.link = apiPlace.link
-        
+        self.categoryImageUrlStr = apiPlace.categories.first?.icon.iconUrlStr()
         if let category = apiPlace.categories.first {
             self.categoryName = category.name
-            self.categoryIconPrefix = category.icon.prefix
-            self.categoryIconSuffix = category.icon.suffix
         }
     }
     
-    // MARK: - Icon URL builder
-    enum IconResolution: String {
-        case micro = "32"
-        case small = "44"
-        case medium = "64"
-        case big = "88"
-        case large = "120"
-    }
     
     /// Returns URL for category icon with given resolution
-    func iconURL(resolution: IconResolution = .medium) -> URL? {
-        guard let prefix = categoryIconPrefix, let suffix = categoryIconSuffix else { return nil }
-        return URL(string: prefix + resolution.rawValue + suffix)
+    func iconURL() -> URL? {
+      guard let urlStr = self.categoryImageUrlStr else { return nil }
+      return URL(string: urlStr)
     }
 }
 

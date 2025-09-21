@@ -27,6 +27,7 @@ struct CategoryPlaceImage: View {
           .cornerRadius(10)
           .font(.title)
           .foregroundColor(.white)
+         
       }
 }
 

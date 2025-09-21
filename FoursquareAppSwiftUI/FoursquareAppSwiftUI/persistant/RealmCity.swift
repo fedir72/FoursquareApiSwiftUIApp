@@ -12,14 +12,15 @@ class RealmCity: Object,
                  ObjectKeyIdentifiable,
                  CityRepresentable {
   
-  var state: String?
+  //var state: String?
   
   @Persisted(primaryKey: true) var _id: String
   @Persisted var name: String = ""
   @Persisted var lat: Double = 0
   @Persisted var lon: Double = 0
-  @Persisted var country: String? = nil
-  //MARK: - persisted favorite plces
+  @Persisted var country: String?
+  @Persisted var state: String?
+  //MARK: - persisted favorite places
   @Persisted var places = List<RealmPlace>()
   
   // Инициализация из OpenMapCity
@@ -29,7 +30,7 @@ class RealmCity: Object,
     self.lat = city.lat
     self.lon = city.lon
     self.country = city.country
-    self._id = UUID().uuidString   //"\(name)-\(country ?? "not found")-\(lat)-\(lon)"
+    self._id = UUID().uuidString   
   }
   
   // Вычисляемые свойства для отображения
@@ -42,6 +43,9 @@ class RealmCity: Object,
     if let country = country, !country.isEmpty {
       components.append(country)
     }
+//    if let state {
+//      
+//    }
     return components.joined(separator: ", ")
   }
   
