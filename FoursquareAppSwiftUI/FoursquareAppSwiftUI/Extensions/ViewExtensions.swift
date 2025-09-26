@@ -21,3 +21,18 @@ extension Image {
   }
 }
 
+
+extension View {
+  
+  //MARK: - apologizeView
+  func apologizeView(with text: String) -> some View {
+    VStack(alignment: .center) {
+         Image(systemName: "exclamationmark.triangle")
+           .font(.largeTitle)
+         Text(text)
+           .multilineTextAlignment(.center)
+           .font(.title2)
+     }
+     .foregroundStyle(.red)
+   }
+}

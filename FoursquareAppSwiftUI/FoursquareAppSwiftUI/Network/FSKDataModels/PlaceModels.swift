@@ -24,6 +24,13 @@ struct Place: Decodable,
 }
 
 extension Place {
+    func toRealmPlace() -> RealmPlace {
+        return RealmPlace(from: self)
+    }
+}
+
+
+extension Place {
   
   enum CodingKeys: String, CodingKey {
     case id = "fsq_id"

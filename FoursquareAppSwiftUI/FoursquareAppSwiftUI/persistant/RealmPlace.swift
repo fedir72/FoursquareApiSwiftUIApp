@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import CoreLocation
 
 class RealmPlace: Object, ObjectKeyIdentifiable {
     
@@ -46,4 +47,36 @@ class RealmPlace: Object, ObjectKeyIdentifiable {
     }
 }
 
+extension RealmPlace {
+  
+    func toPlace() -> Place {
+        let geoPoint = GeoPoint(
+            latitude: self.lat != 0 ? self.lat : nil,
+            longitude: self.lon != 0 ? self.lon : nil
+        )
+        let main = Main(main: geoPoint)
+        let location = MapAdress(
+            country: self.country ?? "",
+            cross_street: nil,
+            formatted_address: self.formattedAddress
+        )
+        let category = Category(
+            id: Int(self._id.hashValue & 0x7fffffff), // создаем уникальный Int ID
+            name: self.categoryName ?? "Unknown",
+            icon: Icon(
+                prefix: self.categoryImageUrlStr?.components(separatedBy: "/").first ?? "",
+                suffix: self.categoryImageUrlStr?.components(separatedBy: "/").last ?? ""
+            )
+        )
 
+        return Place(
+            id: self._id,
+            categories: [category],
+            geocodes: main,
+            link: self.link ?? "",
+            location: location,
+            name: self.name,
+            timezone: self.timezone
+        )
+    }
+}

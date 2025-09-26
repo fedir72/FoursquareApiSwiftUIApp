@@ -39,7 +39,7 @@ struct ZoomPhotoView: View {
                            photoView(with: url, containerSize: geo.size)
                             .frame(width: geo.size.width, height: geo.size.height)
                     } else {
-                        apologizeView()
+                      apologizeView(with: "\nUnfortunately\nthis photo cannot be downloaded\nin full resolution")
                     }
                 }
             }
@@ -50,18 +50,6 @@ struct ZoomPhotoView: View {
 }
 
 private extension ZoomPhotoView {
-  
-  //MARK: - apologizeView
-   func apologizeView() -> some View {
-     VStack(spacing: 0) {
-         Image(systemName: "wrongwaysign")
-           .font(.largeTitle).bold()
-         Text("\nUnfortunately\nthis photo cannot be downloaded\nin full resolution")
-           .multilineTextAlignment(.center)
-           .font(.title2)
-     }
-     .foregroundStyle(.red)
-   }
   
   //MARK: - infoHeaderView
   func infoHeaderView(_ dateText: String) -> some View {

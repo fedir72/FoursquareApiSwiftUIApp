@@ -8,8 +8,8 @@ import SwiftUI
 import RealmSwift
 
 struct RealmCityPlacesList: View {
-    @ObservedResults(RealmPlace.self) var places   // все объекты RealmPlace
-    @ObservedRealmObject var city: RealmCity       // конкретный город
+    @ObservedResults(RealmPlace.self) var places  
+    @ObservedRealmObject var city: RealmCity      
     
     var filteredPlaces: [RealmPlace] {
         city.places.sorted(by: { $0.name < $1.name })
@@ -35,11 +35,10 @@ struct RealmCityPlacesList: View {
         .listStyle(GroupedListStyle())
     }
     
-    /// Удаление напрямую из ObservedResults
     private func deletePlaces(at offsets: IndexSet) {
         for index in offsets {
             let place = filteredPlaces[index]
-            $places.remove(place)   // <-- удаление из базы
+            $places.remove(place)
         }
     }
 }
