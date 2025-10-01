@@ -8,31 +8,23 @@
 import SwiftUI
 
 struct LoadingView: View {
-    var body: some View {
-        ZStack {
-            // Белый фон
-            Color.white
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 16) {
-                ProgressView()
-                    .progressViewStyle(
-                     // LinearProgressViewStyle()
-                      CircularProgressViewStyle(tint: .blue)
-                    )
-                    .scaleEffect(2)
-                
-                Text("Загрузка...")
-                    .foregroundColor(.black)
-                    .font(.headline)
-            }
-            .padding(24)
-            .background(Color.white)
-            .cornerRadius(12)
-            .shadow(radius: 10)
-        }
+  var body: some View {
+    VStack(alignment: .center, spacing: 16) {
+      ProgressView()
+        .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+        .scaleEffect(2)
+      
+      Text("Loading...")
+        .foregroundColor(Color(.label))
+        .font(.headline)
     }
+    .padding(24)
+    .background(Color(.secondarySystemBackground))
+    .cornerRadius(12)
+    .shadow(radius: 10)
+  }
 }
-#Preview {
-  LoadingView()
-}
+
+//#Preview {
+//  LoadingView()
+//}

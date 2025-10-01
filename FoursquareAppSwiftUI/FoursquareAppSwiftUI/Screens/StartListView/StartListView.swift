@@ -4,7 +4,6 @@
 //
 //  Created by ihor fedii on 23.08.25.
 //
-
 import SwiftUI
 import RealmSwift
 import CoreLocation
@@ -32,15 +31,20 @@ struct StartListView: View {
         
         VStack {
           if showSearchBar {
-              CustomSearchBar(
-                  text: $searchText,
-                  placeholder: "enter city name"
-              ) {
-                  performSearch()
-              }
-              .padding(.top, 20)
+            CustomSearchBar(text: $searchText,
+                            placeholder: "enter city name") {
+              performSearch()
+            }
+                            .padding(.top, 20)
           }
           Spacer()
+        }
+        
+        // 🔹 Кнопка «explore sights around me» поверх списка
+        VStack {
+          Spacer()
+          exploreButton()
+            .padding(.bottom, 20)
         }
       }
       .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -49,16 +53,22 @@ struct StartListView: View {
         principalToolbar()
         trailingToolbar()
       }
-      .safeAreaInset(edge: .bottom) {
-        exploreButton()
-      }
+      //MARK: - Checking an existing city when updating a location
       .onChange(of: locationManager.userLocation) { newLocation in
         if newLocation != nil && isLoadingLocation {
-          fetchCurrentCity()
+          createRealmCityFromUserLocation(newLocation!)
         }
       }
+      //MARK: - go to DiscoveryView with verification
       .navigationDestination(for: RealmCity.self) { city in
-        DiscoveryView(realmCity: city, isUserPosition: true)
+        let isUserCity = locationManager.userLocation != nil &&
+        locationManager.isSamePlace(
+          CLLocationCoordinate2D(latitude: city.lat, longitude: city.lon),
+          locationManager.userLocation!.coordinate,
+          toleranceMeters: 3000
+        )
+        
+        DiscoveryView(realmCity: city, isUserPosition: isUserCity)
       }
       .sheet(isPresented: $showSearchSheet) {
         CitySearchResultView(searchCityTerm: searchTerm)
@@ -68,10 +78,9 @@ struct StartListView: View {
   }
 }
 
-// MARK: - UI Functions
 private extension StartListView {
-    
-    // Toolbar
+  
+  // MARK: - UI Functions
     @ToolbarContentBuilder
     func principalToolbar() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
@@ -96,7 +105,7 @@ private extension StartListView {
         }
     }
     
-    // Explore button
+    //MARK: - Explore button
     @ViewBuilder
     func exploreButton() -> some View {
         Button {
@@ -126,50 +135,44 @@ private extension StartListView {
             .frame(minWidth: 200)
         }
     }
-}
-
-// MARK: - Logic Functions
-private extension StartListView {
-    
-    func performSearch() {
-        let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !term.isEmpty else { return }
-        
-        searchTerm = term
-        loadCities(term: term, limit: 15)
-        showSearchSheet = true
-        searchText = ""
-    }
-    
-    func loadCities(term: String, limit: Int) {
-        guard !term.isEmpty else { return }
-        dataSource.loadCities(by: term, limit: limit)
-    }
-    
-    func fetchCurrentCity() {
-        locationManager.getCurrentCity { city in
-            isLoadingLocation = false
-            guard let city = city else {
-                print("Не удалось получить город по геопозиции")
-                return
-            }
-            let realmCity = RealmCity()
-            realmCity.name = city.name
-            if let userLocation = locationManager.userLocation {
-                realmCity.lat = userLocation.coordinate.latitude
-                realmCity.lon = userLocation.coordinate.longitude
-            }
-            path.append(realmCity)
-        }
-    }
-    
-    func createRealmCityFromUserLocation(_ location: CLLocation) {
-        locationManager.getCurrentCity { realmCity in
-            guard let realmCity else { return }
-            path.append(realmCity)
-            isLoadingLocation = false
-        }
-    }
+  
+  // MARK: - Logic Functions
+  func performSearch() {
+      let term = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+      guard !term.isEmpty else { return }
+      
+      searchTerm = term
+      loadCities(term: term, limit: 15)
+      showSearchSheet = true
+      searchText = ""
+  }
+  
+  func loadCities(term: String, limit: Int) {
+      guard !term.isEmpty else { return }
+      dataSource.loadCities(by: term, limit: limit)
+  }
+  
+  func createRealmCityFromUserLocation(_ location: CLLocation) {
+      
+      if let existingCity = locationManager.findExistingCity(in: realm) {
+          // используем существующий город
+          path.append(existingCity)
+          isLoadingLocation = false
+      } else {
+          locationManager.getCurrentCity { realmCity in
+              guard let realmCity else { return }
+              
+              // Сохраняем новый город в Realm
+              try? realm.write {
+                  realm.add(realmCity, update: .all)
+              }
+              
+              path.append(realmCity)
+              isLoadingLocation = false
+          }
+      }
+  }
+  
 }
 
 //#Preview {

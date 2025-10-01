@@ -10,83 +10,74 @@ import RealmSwift
 import MapKit
 
 struct MapPinActionsView: View {
-    // MARK: - Properties
     @Environment(\.realm) var realm
     @ObservedRealmObject var place: RealmPlace
+    let cityId: String
     let isUserPosition: Bool
-    let city: RealmCity
     let onClose: () -> Void
+    
+    private var city: RealmCity? {
+        realm.object(ofType: RealmCity.self, forPrimaryKey: cityId)
+    }
 
-    // Computed property для проверки, добавлено ли место
     private var alreadySaved: Bool {
-        city.places.contains(where: { $0._id == place._id })
+        city?.places.contains(where: { $0._id == place._id }) ?? false
     }
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(place.name)
-                .font(.headline)
-            Text(place.categoryName ?? "Category not found")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
+  var body: some View {
+      VStack(alignment: .leading, spacing: 8) {
+          Text(place.name)
+              .font(.headline)
+          Text(place.categoryName ?? "Category not found")
+              .font(.subheadline)
+              .foregroundColor(.secondary)
 
-            if isUserPosition {
-                Button {
-                    openInMaps()
-                } label: {
-                    Label("Open in Maps", systemImage: "map")
-                        .font(.callout.bold())
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                }
-            }
+          if isUserPosition {
+              Button {
+                  openInMaps()
+              } label: {
+                  Label("Open in Maps", systemImage: "map")
+                      .font(.callout.bold())
+                      .padding()
+                      .frame(maxWidth: .infinity)
+                      .background(Color.blue)
+                      .foregroundColor(.white)
+                      .cornerRadius(12)
+              }
+          }
 
-            // Кнопка добавления в favorites с анимацией
-            Button(action: addPlaceToFavorites) {
-                Text(alreadySaved ? "Place already added" : "Add to Favorites")
-                    .bold()
-                    .font(.callout)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(alreadySaved ? Color.gray : Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-                    .animation(.easeInOut(duration: 0.25), value: alreadySaved)
-            }
-            .disabled(alreadySaved)
+          Button(action: addPlaceToFavorites) {
+              Text(alreadySaved ? "Place already added" : "Add to Favorites")
+                  .bold()
+                  .font(.callout)
+                  .padding()
+                  .frame(maxWidth: .infinity)
+                  .background(alreadySaved ? Color.gray : Color.green)
+                  .foregroundColor(.white)
+                  .cornerRadius(12)
+                  .animation(.easeInOut(duration: 0.25), value: alreadySaved)
+          }
+          .disabled(alreadySaved)
 
-            Button(action: onClose) {
-                Label("Close", systemImage: "xmark.circle")
-                    .font(.callout.bold())
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.gray)
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-            }
-        }
-        .padding()
-        .background(.ultraThinMaterial)
-        .cornerRadius(16)
-        .shadow(radius: 10)
-        .padding()
-    }
-
-    // MARK: - Functions
-    private func openInMaps() {
-        let coordinate = CLLocationCoordinate2D(latitude: place.lat, longitude: place.lon)
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
-        mapItem.name = place.name
-        mapItem.openInMaps(launchOptions: [
-            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
-        ])
-    }
+          Button(action: onClose) {
+              Label("Close", systemImage: "xmark.circle")
+                  .font(.callout.bold())
+                  .padding()
+                  .frame(maxWidth: .infinity)
+                  .background(Color.gray)
+                  .foregroundColor(.white)
+                  .cornerRadius(12)
+          }
+      }
+      .padding()
+      .background(.ultraThinMaterial)
+      .cornerRadius(16)
+      .shadow(radius: 10)
+      .padding()
+  }
 
     private func addPlaceToFavorites() {
-        guard !alreadySaved else { return }
+        guard let city = city, !alreadySaved else { return }
         do {
             try realm.write {
                 city.places.append(place)
@@ -95,4 +86,14 @@ struct MapPinActionsView: View {
             print("❌ Error adding place: \(error.localizedDescription)")
         }
     }
+  
+      private func openInMaps() {
+          let coordinate = CLLocationCoordinate2D(latitude: place.lat, longitude: place.lon)
+          let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
+          mapItem.name = place.name
+          mapItem.openInMaps(launchOptions: [
+              MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+          ])
+      }
+  
 }

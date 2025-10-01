@@ -7,9 +7,10 @@
 
 import SwiftUI
 import RealmSwift
+import MapKit
 
 struct CityListView: View {
-   // @Environment(\.realm) var realm
+    @EnvironmentObject var locationManager: LocationManager
     @ObservedResults(RealmCity.self) var cities
     @ObservedResults(RealmPlace.self) var places
     
@@ -26,13 +27,19 @@ struct CityListView: View {
                 .multilineTextAlignment(.center)
                 .font(.title2)
             }
-            .foregroundStyle(.red)
+            .foregroundStyle(.gray.opacity(0.8))
             .padding()
           }
         } else {
           ForEach(cities) { city in
             NavigationLink {
-              DiscoveryView(realmCity: city, isUserPosition: false)
+              let isUserCity = locationManager.userLocation != nil &&
+              locationManager.isSamePlace(
+                CLLocationCoordinate2D(latitude: city.lat, longitude: city.lon),
+                locationManager.userLocation!.coordinate,
+                toleranceMeters: 3000
+              )
+              DiscoveryView(realmCity: city, isUserPosition: isUserCity)
             } label: {
               CityRow(city: city)
             }

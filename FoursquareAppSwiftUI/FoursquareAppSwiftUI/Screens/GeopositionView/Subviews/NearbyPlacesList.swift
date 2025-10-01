@@ -12,18 +12,19 @@ struct NearbyPlacesList: View {
     let cityName: String
     
     var body: some View {
-        List {
+        ZStack {
             if places.isEmpty {
                 LoadingView()
-            } else {
-                ForEach(places, id: \.name) { place in
+            }
+          
+                List(places, id: \.name) { place in
                     NavigationLink(destination: DetailPlaceView(place: place, cityName: cityName)) {
                        // SearchRow(place: place)
                       PlaceRow(place: place)
                             .frame(height:50)
                     }
                 }
-            }
+        
         }
         .listStyle(GroupedListStyle())
     }
